@@ -1,0 +1,3 @@
+rootProject.name = 'remote-signing'
+include 'apps:core-service'
+findProject(':apps:core-service').name = 'core-service'
