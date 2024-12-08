@@ -1,3 +1,6 @@
 rootProject.name = 'remote-signing'
 include 'apps:core-service'
 findProject(':apps:core-service').name = 'core-service'
+
+include 'apps:sign-server'
+findProject(':apps:sign-server').name = 'sign-server'
