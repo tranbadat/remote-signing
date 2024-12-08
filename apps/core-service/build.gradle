@@ -7,20 +7,10 @@ java {
     }
 }
 
-repositories {
-    mavenCentral()
-}
-
 dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+    implementation "com.itextpdf:itext7-core:7.2.6"
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
-}
-
-tasks.bootJar {
+tasks.named('bootJar') {
     archiveFileName = "${project.name}.jar"
 }
