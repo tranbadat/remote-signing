@@ -1,6 +1,7 @@
 package vn.com.dattb.signserver.dto.request;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.util.List;
@@ -25,6 +26,7 @@ public class SignaturesRequest {
     private String signatureAlgorithm;
 
     @JsonAlias({"requests"})
+    @NotNull
     private List<Request> requests;
 
     @Getter
@@ -35,6 +37,7 @@ public class SignaturesRequest {
     public static class Request {
 
         @JsonAlias({"data", "dtbs"})
+        @NotNull
         private String dtbs;
 
         @JsonAlias({"signature_algorithm", "signatureAlgorithm"})

@@ -1,7 +1,10 @@
 package vn.com.dattb.signserver.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vn.com.dattb.signserver.dto.request.SignaturesRequest;
 import vn.com.dattb.signserver.dto.response.SignatureResponse;
@@ -17,7 +20,8 @@ import vn.com.dattb.signserver.service.SignaturesService;
  * Description:
  * This controller is used to sign the data that needs to be signed
  */
-@RestController("/v1/signatures")
+@RestController
+@RequestMapping("/v1/signatures")
 public class SignaturesController {
 
     private final SignaturesService signaturesService;
@@ -26,7 +30,8 @@ public class SignaturesController {
         this.signaturesService = signaturesService;
     }
 
-    ResponseEntity<SignatureResponse> sign(@RequestBody SignaturesRequest request) {
+    @PostMapping
+    ResponseEntity<SignatureResponse> sign(@Valid @RequestBody SignaturesRequest request) {
         return ResponseEntity.ok(signaturesService.sign(request));
     }
 }
