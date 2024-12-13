@@ -28,7 +28,8 @@ allprojects {
 
 def springProjects = [
         project('apps:core-service'),
-        project('apps:sign-server')
+        project('apps:sign-server'),
+        project('apps:ssa-service')
 ]
 
 configure(springProjects) {

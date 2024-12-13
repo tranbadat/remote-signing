@@ -4,3 +4,6 @@ findProject(':apps:core-service').name = 'core-service'
 
 include 'apps:sign-server'
 findProject(':apps:sign-server').name = 'sign-server'
+
+include 'apps:ssa-service'
+findProject(':apps:ssa-service').name = 'ssa-service'
