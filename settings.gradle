@@ -7,3 +7,6 @@ findProject(':apps:sign-server').name = 'sign-server'
 
 include 'apps:ssa-service'
 findProject(':apps:ssa-service').name = 'ssa-service'
+
+include 'apps:as-service'
+findProject(':apps:as-service').name = 'as-service'
