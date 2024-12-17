@@ -1,8 +1,14 @@
 package vn.com.dattb.ssaservice.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.com.dattb.ssaservice.dto.request.InputSignatures;
+import vn.com.dattb.ssaservice.dto.response.OutputSignatures;
+import vn.com.dattb.ssaservice.service.SignaturesService;
 
 /**
  * SignaturesController
@@ -17,8 +23,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/v1/signatures")
 public class SignaturesController {
 
+    private final SignaturesService signaturesService;
+
+    public SignaturesController(SignaturesService signaturesService) {
+        this.signaturesService = signaturesService;
+    }
+
     @PostMapping("/signHash")
-    public void signHash() {
+    public ResponseEntity<OutputSignatures> signHash(@Valid @RequestBody InputSignatures inputSignatures) {
+        return ResponseEntity.ok(signaturesService.signHash(inputSignatures));
     }
 
     @PostMapping("/signDoc")
