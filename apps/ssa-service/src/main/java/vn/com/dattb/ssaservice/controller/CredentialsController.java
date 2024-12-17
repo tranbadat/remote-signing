@@ -1,8 +1,14 @@
 package vn.com.dattb.ssaservice.controller;
 
+import jakarta.validation.Valid;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
  * CredentialsController.java
@@ -17,6 +23,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/credentials")
 public class CredentialsController {
 
+    private final CredentialsService credentialsService;
+
+    public CredentialsController(CredentialsService credentialsService) {
+        this.credentialsService = credentialsService;
+    }
+
     @PostMapping("/list")
     public String list() {
         return "List credentials";
@@ -27,9 +39,9 @@ public class CredentialsController {
         return "Info credentials";
     }
 
-    @PostMapping("/auhorize")
-    public String authorize() {
-        return "Authorize credentials";
+    @PostMapping("/authorize")
+    public ResponseEntity<OutputCredentialsAuthorize> authorize(@Valid @RequestBody InputCredentialsAuthorize inputCredentialsAuthorize) {
+        return ResponseEntity.ok(credentialsService.authorize(inputCredentialsAuthorize));
     }
 
     @PostMapping("/authorizeCheck")
