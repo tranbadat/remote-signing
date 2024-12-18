@@ -1,6 +1,8 @@
 package vn.com.dattb.ssaservice.service;
 
+import vn.com.dattb.ssaservice.dto.request.InputCredentials;
 import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
 
 /**
@@ -21,4 +23,6 @@ public interface CredentialsService {
      * @return SAD and expiresIn in OutputCredentialsAuthorize
      */
     OutputCredentialsAuthorize authorize(InputCredentialsAuthorize inputCredentialsAuthorize);
+
+    OutputCredentials getCredentialsList(InputCredentials inputCredentials);
 }

@@ -6,7 +6,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.com.dattb.ssaservice.dto.request.InputCredentials;
 import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
@@ -30,8 +32,8 @@ public class CredentialsController {
     }
 
     @PostMapping("/list")
-    public String list() {
-        return "List credentials";
+    public ResponseEntity<OutputCredentials> list(@Valid @RequestBody InputCredentials inputCredentials) {
+        return ResponseEntity.ok(credentialsService.getCredentialsList(inputCredentials));
     }
 
     @PostMapping("/info")
