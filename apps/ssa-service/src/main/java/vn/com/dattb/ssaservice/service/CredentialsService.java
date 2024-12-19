@@ -3,9 +3,11 @@ package vn.com.dattb.ssaservice.service;
 import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
+import vn.com.dattb.ssaservice.dto.request.GetChallengeRequest;
 import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
 import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
 import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
+import vn.com.dattb.ssaservice.dto.response.GetChallengeResponse;
 
 /**
  * CredentialsService
@@ -41,4 +43,12 @@ public interface CredentialsService {
      * @return credentials info in OutputCredentialsInfo
      */
     CredentialsInfoResponse getCredentialsInfo(CredentialsInfoRequest credentialsInfoRequest);
+
+    /**
+     * Get challenge
+     *
+     * @param getChallengeRequest inputGetChallenge
+     * @return challenge in GetChallengeResponse
+     */
+    GetChallengeResponse getChallenge(GetChallengeRequest getChallengeRequest);
 }

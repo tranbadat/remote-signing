@@ -6,12 +6,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
-import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
+import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
+import vn.com.dattb.ssaservice.dto.request.GetChallengeRequest;
 import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
 import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
+import vn.com.dattb.ssaservice.dto.response.GetChallengeResponse;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -39,12 +41,14 @@ public class CredentialsController {
     }
 
     @PostMapping("/info")
-    public ResponseEntity<CredentialsInfoResponse> info(@Valid @RequestBody CredentialsInfoRequest credentialsInfoRequest) {
+    public ResponseEntity<CredentialsInfoResponse> info(
+            @Valid @RequestBody CredentialsInfoRequest credentialsInfoRequest) {
         return ResponseEntity.ok(credentialsService.getCredentialsInfo(credentialsInfoRequest));
     }
 
     @PostMapping("/authorize")
-    public ResponseEntity<CredentialsAuthorizeResponse> authorize(@Valid @RequestBody CredentialsAuthorizeRequest credentialsAuthorizeRequest) {
+    public ResponseEntity<CredentialsAuthorizeResponse> authorize(
+            @Valid @RequestBody CredentialsAuthorizeRequest credentialsAuthorizeRequest) {
         return ResponseEntity.ok(credentialsService.authorize(credentialsAuthorizeRequest));
     }
 
@@ -54,8 +58,9 @@ public class CredentialsController {
     }
 
     @PostMapping("/getChallenge")
-    public String getChallenge() {
-        return "Get challenge credentials";
+    public ResponseEntity<GetChallengeResponse> getChallenge(
+            @Valid @RequestBody GetChallengeRequest getChallengeRequest) {
+        return ResponseEntity.ok(credentialsService.getChallenge(getChallengeRequest));
     }
 
     @PostMapping("/extendTransaction")

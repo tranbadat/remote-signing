@@ -5,9 +5,11 @@ import org.springframework.stereotype.Service;
 import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
 import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
+import vn.com.dattb.ssaservice.dto.request.GetChallengeRequest;
 import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
 import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
 import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
+import vn.com.dattb.ssaservice.dto.response.GetChallengeResponse;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -34,6 +36,11 @@ public class CredentialsServiceImpl implements CredentialsService {
 
     @Override
     public CredentialsInfoResponse getCredentialsInfo(CredentialsInfoRequest credentialsInfoRequest) {
+        return null;
+    }
+
+    @Override
+    public GetChallengeResponse getChallenge(GetChallengeRequest getChallengeRequest) {
         return null;
     }
 }
