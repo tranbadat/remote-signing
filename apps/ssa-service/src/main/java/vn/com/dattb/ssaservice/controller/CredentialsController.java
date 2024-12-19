@@ -8,8 +8,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import vn.com.dattb.ssaservice.dto.request.InputCredentials;
 import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -37,8 +39,8 @@ public class CredentialsController {
     }
 
     @PostMapping("/info")
-    public String info() {
-        return "Info credentials";
+    public ResponseEntity<OutputCredentialsInfo> info(@Valid @RequestBody InputCredentialsInfo inputCredentialsInfo) {
+        return ResponseEntity.ok(credentialsService.getCredentialsInfo(inputCredentialsInfo));
     }
 
     @PostMapping("/authorize")

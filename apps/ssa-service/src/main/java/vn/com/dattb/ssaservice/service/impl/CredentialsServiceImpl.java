@@ -4,8 +4,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import vn.com.dattb.ssaservice.dto.request.InputCredentials;
 import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -27,6 +29,11 @@ public class CredentialsServiceImpl implements CredentialsService {
 
     @Override
     public OutputCredentials getCredentialsList(InputCredentials inputCredentials) {
+        return null;
+    }
+
+    @Override
+    public OutputCredentialsInfo getCredentialsInfo(InputCredentialsInfo inputCredentialsInfo) {
         return null;
     }
 }
