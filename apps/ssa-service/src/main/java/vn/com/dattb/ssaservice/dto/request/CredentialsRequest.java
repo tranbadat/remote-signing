@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class InputCredentials {
+public class CredentialsRequest {
     private String userID;
 
     private Boolean credentialInfo;

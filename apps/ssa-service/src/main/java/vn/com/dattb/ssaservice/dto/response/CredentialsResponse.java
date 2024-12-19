@@ -22,12 +22,12 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class OutputCredentials {
+public class CredentialsResponse {
     @Valid
     private List<String> credentialIDs = new ArrayList<>();
 
     @Valid
-    private List<@Valid OutputCredentialsInfo> credentialInfos;
+    private List<@Valid CredentialsInfoResponse> credentialInfos;
 
     private Boolean onlyValid;
 

@@ -1,8 +1,7 @@
 package vn.com.dattb.ssaservice.dto.response;
 
 import jakarta.validation.Valid;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +15,11 @@ import java.util.List;
  * <p>
  * Description: DTO for output credentials info
  */
-public class OutputCredentialsInfo {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+@Data
+public class CredentialsInfoResponse {
 
     private String credentialID;
 

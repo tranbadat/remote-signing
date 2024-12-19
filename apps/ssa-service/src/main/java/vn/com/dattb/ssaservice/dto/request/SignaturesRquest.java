@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class InputSignatures {
+public class SignaturesRquest {
 
     @JsonAlias({"credential_id", "credentialId"})
     private String credentialId;

@@ -23,7 +23,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class InputCredentialsAuthorize {
+public class CredentialsAuthorizeRequest {
 
     @JsonAlias({"credential_id", "credentialID"})
     private String credentialID;

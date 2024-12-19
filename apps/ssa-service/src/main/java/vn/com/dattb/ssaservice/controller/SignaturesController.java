@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.com.dattb.ssaservice.dto.request.InputSignatures;
-import vn.com.dattb.ssaservice.dto.response.OutputSignatures;
+import vn.com.dattb.ssaservice.dto.request.SignaturesRquest;
+import vn.com.dattb.ssaservice.dto.response.SignaturesResponse;
 import vn.com.dattb.ssaservice.service.SignaturesService;
 
 /**
@@ -30,8 +30,8 @@ public class SignaturesController {
     }
 
     @PostMapping("/signHash")
-    public ResponseEntity<OutputSignatures> signHash(@Valid @RequestBody InputSignatures inputSignatures) {
-        return ResponseEntity.ok(signaturesService.signHash(inputSignatures));
+    public ResponseEntity<SignaturesResponse> signHash(@Valid @RequestBody SignaturesRquest signaturesRquest) {
+        return ResponseEntity.ok(signaturesService.signHash(signaturesRquest));
     }
 
     @PostMapping("/signDoc")
