@@ -2,8 +2,10 @@ package vn.com.dattb.ssaservice.service;
 
 import vn.com.dattb.ssaservice.dto.request.InputCredentials;
 import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
 import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
+import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
 
 /**
  * CredentialsService
@@ -24,5 +26,19 @@ public interface CredentialsService {
      */
     OutputCredentialsAuthorize authorize(InputCredentialsAuthorize inputCredentialsAuthorize);
 
+    /**
+     * Get credentials list
+     *
+     * @param inputCredentials inputCredentials
+     * @return credentials list in OutputCredentials
+     */
     OutputCredentials getCredentialsList(InputCredentials inputCredentials);
+
+    /**
+     * Get credentials info
+     *
+     * @param inputCredentialsInfo inputCredentialsInfo
+     * @return credentials info in OutputCredentialsInfo
+     */
+    OutputCredentialsInfo getCredentialsInfo(InputCredentialsInfo inputCredentialsInfo);
 }
