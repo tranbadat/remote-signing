@@ -2,12 +2,12 @@ package vn.com.dattb.ssaservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import vn.com.dattb.ssaservice.dto.request.InputCredentials;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
+import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
+import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -23,17 +23,17 @@ import vn.com.dattb.ssaservice.service.CredentialsService;
 @Slf4j
 public class CredentialsServiceImpl implements CredentialsService {
     @Override
-    public OutputCredentialsAuthorize authorize(InputCredentialsAuthorize inputCredentialsAuthorize) {
+    public CredentialsAuthorizeResponse authorize(CredentialsAuthorizeRequest credentialsAuthorizeRequest) {
         return null;
     }
 
     @Override
-    public OutputCredentials getCredentialsList(InputCredentials inputCredentials) {
+    public CredentialsResponse getCredentialsList(CredentialsRequest credentialsRequest) {
         return null;
     }
 
     @Override
-    public OutputCredentialsInfo getCredentialsInfo(InputCredentialsInfo inputCredentialsInfo) {
+    public CredentialsInfoResponse getCredentialsInfo(CredentialsInfoRequest credentialsInfoRequest) {
         return null;
     }
 }

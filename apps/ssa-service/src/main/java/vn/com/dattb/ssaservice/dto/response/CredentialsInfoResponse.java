@@ -16,7 +16,7 @@ import java.util.List;
  * <p>
  * Description: DTO for output credentials info
  */
-public class OutputCredentialsInfo {
+public class CredentialsInfoResponse {
 
     private String credentialID;
 

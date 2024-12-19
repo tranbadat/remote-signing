@@ -1,11 +1,11 @@
 package vn.com.dattb.ssaservice.service;
 
-import vn.com.dattb.ssaservice.dto.request.InputCredentials;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
+import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
+import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
 
 /**
  * CredentialsService
@@ -21,24 +21,24 @@ public interface CredentialsService {
     /**
      * Authorize credentials
      *
-     * @param inputCredentialsAuthorize inputCredentialsAuthorize
+     * @param credentialsAuthorizeRequest inputCredentialsAuthorize
      * @return SAD and expiresIn in OutputCredentialsAuthorize
      */
-    OutputCredentialsAuthorize authorize(InputCredentialsAuthorize inputCredentialsAuthorize);
+    CredentialsAuthorizeResponse authorize(CredentialsAuthorizeRequest credentialsAuthorizeRequest);
 
     /**
      * Get credentials list
      *
-     * @param inputCredentials inputCredentials
+     * @param credentialsRequest inputCredentials
      * @return credentials list in OutputCredentials
      */
-    OutputCredentials getCredentialsList(InputCredentials inputCredentials);
+    CredentialsResponse getCredentialsList(CredentialsRequest credentialsRequest);
 
     /**
      * Get credentials info
      *
-     * @param inputCredentialsInfo inputCredentialsInfo
+     * @param credentialsInfoRequest inputCredentialsInfo
      * @return credentials info in OutputCredentialsInfo
      */
-    OutputCredentialsInfo getCredentialsInfo(InputCredentialsInfo inputCredentialsInfo);
+    CredentialsInfoResponse getCredentialsInfo(CredentialsInfoRequest credentialsInfoRequest);
 }

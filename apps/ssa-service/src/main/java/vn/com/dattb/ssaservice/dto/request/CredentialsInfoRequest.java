@@ -18,7 +18,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 @Data
-public class InputCredentialsInfo {
+public class CredentialsInfoRequest {
 
     private String credentialID;
 

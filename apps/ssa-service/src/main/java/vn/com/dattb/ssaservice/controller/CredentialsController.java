@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import vn.com.dattb.ssaservice.dto.request.InputCredentials;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.request.InputCredentialsInfo;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentials;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsAuthorize;
-import vn.com.dattb.ssaservice.dto.response.OutputCredentialsInfo;
+import vn.com.dattb.ssaservice.dto.request.CredentialsRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsAuthorizeRequest;
+import vn.com.dattb.ssaservice.dto.request.CredentialsInfoRequest;
+import vn.com.dattb.ssaservice.dto.response.CredentialsResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsAuthorizeResponse;
+import vn.com.dattb.ssaservice.dto.response.CredentialsInfoResponse;
 import vn.com.dattb.ssaservice.service.CredentialsService;
 
 /**
@@ -34,18 +34,18 @@ public class CredentialsController {
     }
 
     @PostMapping("/list")
-    public ResponseEntity<OutputCredentials> list(@Valid @RequestBody InputCredentials inputCredentials) {
-        return ResponseEntity.ok(credentialsService.getCredentialsList(inputCredentials));
+    public ResponseEntity<CredentialsResponse> list(@Valid @RequestBody CredentialsRequest credentialsRequest) {
+        return ResponseEntity.ok(credentialsService.getCredentialsList(credentialsRequest));
     }
 
     @PostMapping("/info")
-    public ResponseEntity<OutputCredentialsInfo> info(@Valid @RequestBody InputCredentialsInfo inputCredentialsInfo) {
-        return ResponseEntity.ok(credentialsService.getCredentialsInfo(inputCredentialsInfo));
+    public ResponseEntity<CredentialsInfoResponse> info(@Valid @RequestBody CredentialsInfoRequest credentialsInfoRequest) {
+        return ResponseEntity.ok(credentialsService.getCredentialsInfo(credentialsInfoRequest));
     }
 
     @PostMapping("/authorize")
-    public ResponseEntity<OutputCredentialsAuthorize> authorize(@Valid @RequestBody InputCredentialsAuthorize inputCredentialsAuthorize) {
-        return ResponseEntity.ok(credentialsService.authorize(inputCredentialsAuthorize));
+    public ResponseEntity<CredentialsAuthorizeResponse> authorize(@Valid @RequestBody CredentialsAuthorizeRequest credentialsAuthorizeRequest) {
+        return ResponseEntity.ok(credentialsService.authorize(credentialsAuthorizeRequest));
     }
 
     @PostMapping("/authorizeCheck")
