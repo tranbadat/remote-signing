@@ -10,3 +10,6 @@ findProject(':apps:ssa-service').name = 'ssa-service'
 
 include 'apps:as-service'
 findProject(':apps:as-service').name = 'as-service'
+
+include 'libs:common'
+findProject(':libs:common')?.name = 'common'
