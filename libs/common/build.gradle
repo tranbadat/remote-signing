@@ -1,0 +1,13 @@
+group = 'vn.com.dattb'
+version = '1.0.0'
+
+dependencies {
+    implementation "org.modelmapper:modelmapper:${modelmapperVersion}"
+    implementation "org.bouncycastle:bcpkix-jdk15on:${bouncyCastleVersion}"
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
+}
+
+tasks.named('jar') {
+    archiveFileName = "${project.name}.jar"
+}
