@@ -17,7 +17,7 @@ java {
 
 ext {
     commonsTextVersion = '1.10.0'
-    bouncyCastleVersion = "1.76"
+    bouncyCastleVersion = "1.78"
     modelmapperVersion = "3.1.0"
     commonsLang3Version = "3.12.0"
 }
