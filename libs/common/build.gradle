@@ -6,6 +6,7 @@ dependencies {
     implementation "org.bouncycastle:bcprov-jdk18on:${bouncyCastleVersion}"
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.1'
+    implementation "io.github.openfeign:feign-okhttp:${okhttpVersion}"
 }
 
 tasks.named('jar') {
