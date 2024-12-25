@@ -1,0 +1,19 @@
+server:
+  port: 8082
+spring:
+  application:
+    name: as-service
+  cloud:
+    gateway:
+      mvc:
+        routes:
+          - id: login_route
+            uri: http://localhost:8080
+            predicates:
+              - Path=/v1/auth/token
+            filters:
+              - RewritePath=/v1/auth/token, /realms/as-realm/protocol/openid-connect/token
+        x-forwarded-request-headers-filter:
+          host-enabled: true
+          for-enabled: true
+          proto-enabled: true
