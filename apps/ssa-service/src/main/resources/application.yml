@@ -1,0 +1,10 @@
+server:
+  port: 8085
+spring:
+  application:
+    name: ssa-service
+  security:
+    oauth2:
+      authorizationserver:
+        endpoint:
+          jwk-set-uri: http://localhost:8080/realms/as-realm/protocol/openid-connect/certs
