@@ -19,7 +19,9 @@ import lombok.NoArgsConstructor;
 @Builder
 @Data
 public class SuccessResponse {
+    @Builder.Default
     private String code = "00";
 
+    @Builder.Default
     private String message = "success";
 }
