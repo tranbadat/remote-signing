@@ -1,6 +1,6 @@
 package vn.com.dattb.ssaservice.service;
 
-import vn.com.dattb.ssaservice.dto.request.SignaturesRquest;
+import vn.com.dattb.ssaservice.dto.request.SignaturesRequest;
 import vn.com.dattb.ssaservice.dto.response.SignaturesResponse;
 
 /**
@@ -20,5 +20,5 @@ public interface SignaturesService {
      * @param signaturesRquest input signature
      * @return output signature
      */
-    SignaturesResponse signHash(SignaturesRquest signaturesRquest);
+    SignaturesResponse signHash(SignaturesRequest signaturesRquest);
 }

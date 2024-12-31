@@ -24,6 +24,7 @@ import java.util.List;
 @Data
 public class CredentialsResponse {
     @Valid
+    @Builder.Default
     private List<String> credentialIDs = new ArrayList<>();
 
     @Valid

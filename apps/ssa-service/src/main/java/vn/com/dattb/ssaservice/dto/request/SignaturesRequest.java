@@ -22,7 +22,7 @@ import java.util.List;
 @NoArgsConstructor
 @Builder
 @Data
-public class SignaturesRquest {
+public class SignaturesRequest {
 
     @JsonAlias({"credential_id", "credentialId"})
     private String credentialId;
@@ -44,6 +44,7 @@ public class SignaturesRquest {
     private String signAlgoParams;
 
     @JsonAlias({"operation_mode", "operationMode"})
+    @Builder.Default
     private String operationMode = "S";
 
     @JsonAlias({"validity_period", "validityPeriod"})

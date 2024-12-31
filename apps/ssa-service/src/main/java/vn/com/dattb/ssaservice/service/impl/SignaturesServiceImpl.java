@@ -2,7 +2,7 @@ package vn.com.dattb.ssaservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import vn.com.dattb.ssaservice.dto.request.SignaturesRquest;
+import vn.com.dattb.ssaservice.dto.request.SignaturesRequest;
 import vn.com.dattb.ssaservice.dto.response.SignaturesResponse;
 import vn.com.dattb.ssaservice.service.SignaturesService;
 
@@ -20,7 +20,7 @@ import vn.com.dattb.ssaservice.service.SignaturesService;
 @Slf4j
 public class SignaturesServiceImpl implements SignaturesService {
     @Override
-    public SignaturesResponse signHash(SignaturesRquest signaturesRquest) {
+    public SignaturesResponse signHash(SignaturesRequest signaturesRquest) {
         try {
             String credentialId = signaturesRquest.getCredentialId();
             log.info("Start sign hash for credentialId: {}", credentialId);
