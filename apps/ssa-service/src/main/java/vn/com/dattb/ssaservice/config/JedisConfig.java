@@ -1,6 +1,7 @@
 package vn.com.dattb.ssaservice.config;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import redis.clients.jedis.JedisPoolConfig;
 
 import java.time.Duration;
@@ -14,6 +15,7 @@ import java.time.Duration;
  * <p>
  * Description: Jedis configuration
  */
+@Configuration
 public class JedisConfig {
     @Bean
     public JedisPoolConfig buildPoolConfig() {
