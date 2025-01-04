@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import vn.com.dattb.ssaservice.service.NotificationService;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 
 /**
@@ -36,21 +35,12 @@ public class FirebaseNotificationServiceImpl implements NotificationService {
     @Value("${fcm.notification-endpoint}")
     private String fcmNotificationEndpoint ="/messages:send";
 
-    @Value("${fcm.path-to-service-account-key}")
-    private String pathToServiceAccountKey;
-
     private final GoogleCredentials googleCredentials;
 
-    public FirebaseNotificationServiceImpl() throws IOException {
-        // Load the service account key JSON file
-        log.info("Loading Firebase service account key...");
-        try (FileInputStream serviceAccount
-                     = new FileInputStream(pathToServiceAccountKey)) {
-            this.googleCredentials = GoogleCredentials.fromStream(serviceAccount)
-                    .createScoped("https://www.googleapis.com/auth/firebase.messaging");
-        }
-        log.info("Firebase service account key loaded successfully");
+    public FirebaseNotificationServiceImpl(GoogleCredentials googleCredentials) {
+        this.googleCredentials = googleCredentials;
     }
+
 
     private String getAccessToken() throws IOException {
         googleCredentials.refreshIfExpired();
