@@ -1,6 +1,8 @@
 package vn.com.dattb.ssaservice.dto;
 
 import com.fasterxml.jackson.annotation.JsonAlias;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * AuthObject
@@ -11,6 +13,8 @@ import com.fasterxml.jackson.annotation.JsonAlias;
  * <p>
  * Description: DTO for auth object
  */
+@Getter
+@Setter
 public class AuthObject {
 
     @JsonAlias({"id", "ID"})

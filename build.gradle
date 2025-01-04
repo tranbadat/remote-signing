@@ -22,6 +22,8 @@ ext {
     commonsLang3Version = "3.12.0"
     okhttpVersion = "13.5"
     jedisVersion = "5.0.2"
+    gsonVersion = "2.10.1"
+    googleOAuth2Version = "1.18.0"
 }
 
 allprojects {
