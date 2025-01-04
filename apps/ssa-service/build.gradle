@@ -9,6 +9,8 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation "redis.clients:jedis:${jedisVersion}"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+    implementation "com.google.auth:google-auth-library-oauth2-http:${googleOAuth2Version}"
 }
 
 tasks.named('bootJar') {
