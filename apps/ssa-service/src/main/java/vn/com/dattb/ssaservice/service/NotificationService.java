@@ -1,5 +1,7 @@
 package vn.com.dattb.ssaservice.service;
 
+import java.io.IOException;
+
 /**
  * NotificationService
  * <p>
@@ -10,4 +12,6 @@ package vn.com.dattb.ssaservice.service;
  * Description: Service for handling notification requests
  */
 public interface NotificationService {
+
+    void sendNotification(String targetToken, String title, String body) throws IOException;
 }

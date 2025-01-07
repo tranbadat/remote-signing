@@ -43,10 +43,14 @@ public class FirebaseNotificationServiceImpl implements NotificationService {
 
 
     private String getAccessToken() throws IOException {
+        log.info("Refreshing access token...");
         googleCredentials.refreshIfExpired();
-        return googleCredentials.getAccessToken().getTokenValue();
+        String accessToken = googleCredentials.getAccessToken().getTokenValue();
+        log.info("Access token successfully refreshed: {}", accessToken);
+        return accessToken;
     }
 
+    @Override
     public void sendNotification(String targetToken, String title, String body) throws IOException {
         // Build the notification payload
         String messagePayload = buildMessagePayload(targetToken, title, body);
@@ -70,7 +74,7 @@ public class FirebaseNotificationServiceImpl implements NotificationService {
     private void sendPostRequest(String payload) throws IOException {
         try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
             log.info("Sending POST request to FCM...");
-            String url = fcmBaseUrl + "/" + fcmProjectId + fcmNotificationEndpoint;
+            String url = fcmBaseUrl  + fcmProjectId + fcmNotificationEndpoint;
             log.info("URL: {}", url);
             HttpPost httpPost = new HttpPost(url);
             httpPost.setHeader("Authorization", "Bearer " + getAccessToken());
@@ -80,6 +84,7 @@ public class FirebaseNotificationServiceImpl implements NotificationService {
             httpPost.setEntity(entity);
 
             try (CloseableHttpResponse response = httpClient.execute(httpPost)) {
+                log.info("Response body: {}", response.getEntity().getContent());
                 log.info("Response status: {}", response.getStatusLine());
             }
         }
