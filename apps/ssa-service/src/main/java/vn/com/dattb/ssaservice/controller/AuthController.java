@@ -4,6 +4,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import vn.com.dattb.ssaservice.service.NotificationService;
 
 /**
  * AuthController
@@ -17,9 +18,23 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/v1/auth")
 public class AuthController {
+    private final NotificationService notificationService;
+
+    public AuthController(NotificationService notificationService) {
+        this.notificationService = notificationService;
+    }
 
     @PostMapping("/login")
     public ResponseEntity<String> login() {
+        try {
+            notificationService.sendNotification(
+                    "TARGET_DEVICE_TOKEN", // Replace with your target device token
+                    "Test Title",
+                    "Test Body"
+            );
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return ResponseEntity.ok("Login from SSA service");
     }
 
