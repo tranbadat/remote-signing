@@ -14,10 +14,10 @@ services:
       - 3306:3306
     volumes:
       - mysql-data:/var/lib/mysql
-# copy the sql file init from /resources/init.sql to /docker-entrypoint-initdb.d/init.sql
-#      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
+    # copy the sql file init from /resources/init.sql to /docker-entrypoint-initdb.d/init.sql
+    #      - ./resources/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
-      - keycloak-network
+      - remote-signing-network
   keycloak:
     build:
       context: .
@@ -36,9 +36,70 @@ services:
     volumes:
       - keycloak-data:/opt/jboss/keycloak/standalone/data
     networks:
-      - keycloak-network
+      - remote-signing-network
     depends_on:
       - mysql
+
+  vault:
+    image: vault:1.13.3
+    container_name: vault
+    environment:
+      VAULT_DEV_ROOT_TOKEN_ID: root
+      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+    ports:
+      - 8200:8200
+    volumes:
+      - vault-data: /vault/data
+    networks:
+      - remote-signing-network
+
+  redis:
+    image: redis:latest
+    container_name: redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data: /data
+    networks:
+      - remote-signing-network
+
+  kafka:
+    image: confluentinc/cp-kafka:latest
+    container_name: kafka
+    environment:
+      KAFKA_BROKER_ID: 1
+      KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+    ports:
+      - "9092:9092"
+    networks:
+      - remote-signing-network
+
+  zookeeper:
+    image: confluentinc/cp-zookeeper:latest
+    container_name: zookeeper
+    environment:
+      ZOOKEEPER_CLIENT_PORT: 2181
+      ZOOKEEPER_TICK_TIME: 2000
+    ports:
+      - "2181:2181"
+    networks:
+      - remote-signing-network
+
+  s3:
+    image: minio/minio:latest
+    container_name: minio
+    environment:
+      MINIO_ACCESS_KEY: minio
+      MINIO_SECRET_KEY: minio123
+    command: server /data
+    ports:
+      - "9000:9000"
+    volumes:
+      - minio-data: /data
+    networks:
+      - remote-signing-network
 
 volumes:
   keycloak-data:
@@ -53,6 +114,25 @@ volumes:
       type: 'none'
       o: 'bind'
       device: '/var/lib/mysql' #or replace with your own path
+  vault-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/vault/data' # or replace with your own path
+
+  redis-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/redis/data' # or replace with your own path
+  minio-data:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: '/opt/minio/data' # or replace with your own path
 networks:
-  keycloak-network:
+  remote-signing-network:
     driver: bridge
