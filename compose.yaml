@@ -40,26 +40,34 @@ services:
     depends_on:
       - mysql
 
-  vault:
-    image: vault:1.13.3
-    container_name: vault
+  vault-tls:
+    image: hashicorp/vault:latest
+    hostname: vault-tls
     environment:
-      VAULT_DEV_ROOT_TOKEN_ID: root
-      VAULT_DEV_LISTEN_ADDRESS: 0.0.0.0:8200
+      #      VAULT_CAPATH: /etc/vault/ca.crt
+      VAULT_DEV_ROOT_TOKEN_ID: testtoken
     ports:
       - 8200:8200
+    privileged: true
     volumes:
-      - vault-data: /vault/data
-    networks:
-      - remote-signing-network
+      #      - ./integrationTests/e2e-tls/configs:/etc/vault
+      - vault-data:/var/lib/vault:rw
+  #    entrypoint: vault server -config=/etc/vault/config.hcl
 
   redis:
-    image: redis:latest
-    container_name: redis
+    image: redis
+    #    env_file: ../docker.env
+    hostname: redis
     ports:
       - "6379:6379"
     volumes:
-      - redis-data: /data
+      - ./redis.conf:/redis.conf
+    command: [ "redis-server", "/redis.conf" ]
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 30s
+      retries: 3
     networks:
       - remote-signing-network
 
@@ -69,10 +77,28 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT,PLAINTEXT_INTERNAL:PLAINTEXT
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092,PLAINTEXT_INTERNAL://kafka:29092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+      KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
+      KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
+
     ports:
       - "9092:9092"
+    networks:
+      - remote-signing-network
+  kafka-ui:
+    image: provectuslabs/kafka-ui
+    container_name: kafka-ui
+    ports:
+      - "9999:8080"
+    restart: always
+    environment:
+      KAFKA_CLUSTERS_0_NAME: local
+      KAFKA_CLUSTERS_0_BOOTSTRAPSERVERS: kafka:29092
+      KAFKA_CLUSTERS_0_ZOOKEEPER=zookeeper: 2181
+    depends_on:
+      - kafka
     networks:
       - remote-signing-network
 
@@ -89,17 +115,27 @@ services:
 
   s3:
     image: minio/minio:latest
-    container_name: minio
+    #    env_file: ../docker.env
+    networks:
+      - remote-signing-network
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    deploy:
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - minio-data:/data
+    healthcheck:
+      test: [ "CMD", "curl", "-f", "http://minio:9000/minio/health/live" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
     environment:
       MINIO_ACCESS_KEY: minio
       MINIO_SECRET_KEY: minio123
-    command: server /data
-    ports:
-      - "9000:9000"
-    volumes:
-      - minio-data: /data
-    networks:
-      - remote-signing-network
+    entrypoint: sh
+    command: -c 'minio server --console-address ":9001" /data'
 
 volumes:
   keycloak-data:
@@ -115,18 +151,14 @@ volumes:
       o: 'bind'
       device: '/var/lib/mysql' #or replace with your own path
   vault-data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/opt/vault/data' # or replace with your own path
-
-  redis-data:
-    driver: local
-    driver_opts:
-      type: 'none'
-      o: 'bind'
-      device: '/opt/redis/data' # or replace with your own path
+  #
+  #  redis-data:
+  #    driver: local
+  #    driver_opts:
+  #      type: 'none'
+  #      o: 'bind'
+  #      device: '/opt/redis/data' # or replace with your own path
+  #  s3-data:
   minio-data:
     driver: local
     driver_opts:
