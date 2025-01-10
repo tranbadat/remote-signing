@@ -1,0 +1,13 @@
+FROM gradle:8.7.0-jdk17-alpine AS builder
+
+WORKDIR /workspace
+COPY . .
+RUN gradle -i apps:ssa-service:build
+
+FROM openjdk:17-alpine
+WORKDIR /app
+RUN echo "Copying jar"
+COPY --from=builder /workspace/apps/ssa-service/build/libs/ssa-service.jar .
+COPY --from=builder /workspace/esign-dattb-firebase-adminsdk-zxyyn-e9464763f0.json /home/dattb/service-account.json
+RUN echo "Copying jar done"
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","ssa-service.jar"]
