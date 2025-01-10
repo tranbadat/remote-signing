@@ -137,6 +137,26 @@ services:
     entrypoint: sh
     command: -c 'minio server --console-address ":9001" /data'
 
+  ssa-service:
+    container_name: ssa-service
+    build:
+      dockerfile: apps/ssa-service/Dockerfile
+    ports:
+      - "8085:8085"
+    depends_on:
+      - keycloak
+    networks:
+      - remote-signing-network
+  as-service:
+    container_name: as-service
+    build:
+      dockerfile: apps/as-service/Dockerfile
+    ports:
+      - "8082:8082"
+    depends_on:
+      - keycloak
+    networks:
+      - remote-signing-network
 volumes:
   keycloak-data:
     driver: local
