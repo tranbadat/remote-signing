@@ -34,8 +34,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(authorizeRequests ->
                         authorizeRequests
-                                .requestMatchers("v1/auth/login").permitAll()
-                                .anyRequest().authenticated()
+                                .requestMatchers("/v1/auth/login","/actuator/**").permitAll()
+                                .anyRequest().permitAll()
                 )
                 .oauth2ResourceServer(oauth2ResourceServer ->
                         oauth2ResourceServer
