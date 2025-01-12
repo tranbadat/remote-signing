@@ -24,6 +24,7 @@ ext {
     jedisVersion = "5.0.2"
     gsonVersion = "2.10.1"
     googleOAuth2Version = "1.18.0"
+    postgresVersion = "42.6.0"
 }
 
 allprojects {
