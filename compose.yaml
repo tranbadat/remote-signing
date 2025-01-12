@@ -137,6 +137,25 @@ services:
     entrypoint: sh
     command: -c 'minio server --console-address ":9001" /data'
 
+  postgres:
+    image: postgres:13
+    hostname: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [ "CMD", "pg_isready", "-d", "e-contract", "-U", "dattb" ]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+    environment:
+      POSTGRES_USER: 'dattb'
+      POSTGRES_PASSWORD: 'dattb123'
+      POSTGRES_DB: 'e-contract'
+    networks:
+      - remote-signing-network
+
   ssa-service:
     container_name: ssa-service
     build:
@@ -157,24 +176,17 @@ services:
       - keycloak
     networks:
       - remote-signing-network
-  postgres:
-    image: postgres:13
-    hostname: postgres
+  core-service:
+    container_name: core-service
+    build:
+      dockerfile: apps/core-service/Dockerfile
     ports:
-      - "5432:5432"
-    volumes:
-      - postgres-data:/var/lib/postgresql/data
-    healthcheck:
-      test: [ "CMD", "pg_isready", "-d", "e-contract", "-U", "dattb" ]
-      interval: 30s
-      timeout: 20s
-      retries: 3
-    environment:
-      POSTGRES_USER: 'dattb'
-      POSTGRES_PASSWORD: 'dattb123'
-      POSTGRES_DB: 'e-contract'
+      - "8083:8083"
+    depends_on:
+      - postgres
     networks:
       - remote-signing-network
+
 volumes:
   keycloak-data:
     driver: local
