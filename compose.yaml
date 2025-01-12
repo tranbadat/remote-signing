@@ -165,16 +165,16 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data
     healthcheck:
-      test: [ "CMD", "pg_isready", "-d", "outline", "-U", "dattb" ]
+      test: [ "CMD", "pg_isready", "-d", "e-contract", "-U", "dattb" ]
       interval: 30s
       timeout: 20s
       retries: 3
     environment:
       POSTGRES_USER: 'dattb'
       POSTGRES_PASSWORD: 'dattb123'
-      POSTGRES_DB: 'outline'
+      POSTGRES_DB: 'e-contract'
     networks:
-      - keycloak_outline-app
+      - remote-signing-network
 volumes:
   keycloak-data:
     driver: local
@@ -208,7 +208,7 @@ volumes:
     driver_opts:
       type: 'none'
       o: 'bind'
-      device: '/opt/postgres/data' # or replace with your own path
+      device: '/var/lib/postgresql/data' # or replace with your own path
 networks:
   remote-signing-network:
     driver: bridge
