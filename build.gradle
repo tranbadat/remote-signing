@@ -24,7 +24,7 @@ ext {
     jedisVersion = "5.0.2"
     gsonVersion = "2.10.1"
     googleOAuth2Version = "1.18.0"
-    postgresVersion = "42.6.0"
+    postgresVersion = "42.7.2"
 }
 
 allprojects {
@@ -92,6 +92,7 @@ configure(springProjects) {
         testImplementation 'org.springframework.boot:spring-boot-starter-test'
         testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
         implementation "org.apache.commons:commons-text:${commonsTextVersion}"
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
     }
 }
 
