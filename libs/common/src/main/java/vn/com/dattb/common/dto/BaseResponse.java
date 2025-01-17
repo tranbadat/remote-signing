@@ -1,5 +1,6 @@
 package vn.com.dattb.common.dto;
 
+import lombok.Builder;
 import lombok.Data;
 
 /**
@@ -12,6 +13,7 @@ import lombok.Data;
  * Description: BaseResponse is the base class for all response
  */
 @Data
+@Builder
 public class BaseResponse<T> {
     private String code;
     private String message;
