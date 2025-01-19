@@ -25,6 +25,7 @@ ext {
     gsonVersion = "2.10.1"
     googleOAuth2Version = "1.18.0"
     postgresVersion = "42.7.2"
+    liquibaseVersion = "4.31.0"
 }
 
 allprojects {
