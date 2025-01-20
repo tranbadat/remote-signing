@@ -46,7 +46,7 @@ public class TenantDatabaseMigrator {
                         new ClassLoaderResourceAccessor(),
                         database
                 );
-                liquibase.update("");
+                liquibase.update("tenant-context");
             } catch (Exception e) {
                 throw new RuntimeException("Failed to migrate tenant database", e);
             }
