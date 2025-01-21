@@ -47,6 +47,16 @@
                 <constraints nullable="false"/>
             </column>
         </createTable>
-
+        <insert tableName="contract">
+            <column name="contract_number" value="CONTRACT-001"/>
+            <column name="contract_name" value="Contract 1"/>
+            <column name="contract_type" value="Type 1"/>
+            <column name="contract_status" value="Active"/>
+            <column name="contract_start_date" value="2025-01-19 21:00:00"/>
+            <column name="contract_end_date" value="2025-01-19 21:00:00"/>
+            <column name="contract_value" value="1000000.00"/>
+            <column name="contract_currency" value="USD"/>
+            <column name="contract_description" value="Description 1"/>
+        </insert>
     </changeSet>
 </databaseChangeLog>
