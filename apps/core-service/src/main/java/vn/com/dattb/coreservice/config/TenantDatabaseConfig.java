@@ -2,6 +2,7 @@ package vn.com.dattb.coreservice.config;
 
 import jakarta.persistence.EntityManagerFactory;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.boot.orm.jpa.EntityManagerFactoryBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,9 +11,9 @@ import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
-import vn.com.dattb.coreservice.service.TenantDataSourceService;
 
 import javax.sql.DataSource;
+import java.util.HashMap;
 
 /**
  * TenantDatabaseConfig
@@ -30,12 +31,8 @@ import javax.sql.DataSource;
         entityManagerFactoryRef = "tenantEntityManagerFactory",
         transactionManagerRef = "tenantTransactionManager"
 )
+@EnableConfigurationProperties({TenantHikariDatasourceProperties.class})
 public class TenantDatabaseConfig {
-    @Bean(name = "tenantDataSource")
-    public DataSource tenantDataSource(TenantDataSourceService tenantDataSourceService) {
-        // Assume TenantDataSourceService provides the dynamic DataSource
-        return tenantDataSourceService.getCurrentDataSource();
-    }
 
     @Bean(name = "tenantEntityManagerFactory")
     public LocalContainerEntityManagerFactoryBean tenantEntityManagerFactory(
@@ -53,4 +50,21 @@ public class TenantDatabaseConfig {
             @Qualifier("tenantEntityManagerFactory") EntityManagerFactory entityManagerFactory) {
         return new JpaTransactionManager(entityManagerFactory);
     }
+
+    @Bean(name = "tenantDataSource")
+    public DataSource tenantDataSource(TenantDataSourceService tenantDataSourceService) {
+        TenantRoutingDataSource tenantRoutingDataSource = new TenantRoutingDataSource();
+
+        // Set the preloaded tenant data sources
+        tenantRoutingDataSource.setTargetDataSources(
+                new HashMap<>(tenantDataSourceService.getTenantDataSourcesMap())
+        );
+
+        // Default DataSource (optional)
+        tenantRoutingDataSource.setDefaultTargetDataSource(tenantDataSourceService.getDataSource("default"));
+
+        tenantRoutingDataSource.afterPropertiesSet();
+        return tenantRoutingDataSource;
+    }
+
 }

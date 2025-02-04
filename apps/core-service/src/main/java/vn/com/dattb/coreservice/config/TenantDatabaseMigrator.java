@@ -8,7 +8,6 @@ import liquibase.database.jvm.JdbcConnection;
 import liquibase.resource.ClassLoaderResourceAccessor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
-import vn.com.dattb.coreservice.service.TenantDataSourceService;
 
 import java.sql.Connection;
 import java.util.List;
@@ -37,12 +36,12 @@ public class TenantDatabaseMigrator {
         log.info("Found {} tenant databases", tenantDataSources.size());
         for (HikariDataSource dataSource : tenantDataSources) {
             log.info("Migrating tenant database: {}", dataSource.getJdbcUrl());
-            try (dataSource; Connection connection = dataSource.getConnection()) {
+            try (Connection connection = dataSource.getConnection()) {
                 Database database = DatabaseFactory.getInstance()
                         .findCorrectDatabaseImplementation(new JdbcConnection(connection));
 
                 Liquibase liquibase = new Liquibase(
-                        "classpath:db/tenant/tenant-changelog.xml",
+                        "db/tenant/tenant-changelog.xml",
                         new ClassLoaderResourceAccessor(),
                         database
                 );
