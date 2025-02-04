@@ -1,7 +1,10 @@
 package vn.com.dattb.coreservice.entity.master;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
@@ -19,6 +22,9 @@ import java.time.LocalDateTime;
 @Data
 @Entity
 @Table(name = "tenant_datasource_config")
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class TenantDatasourceConfig {
 
     @Id
@@ -31,34 +37,39 @@ public class TenantDatasourceConfig {
     private String datasourceName;
 
     @Column(name = "datasource_url", nullable = false, length = 255)
-    private String datasourceUrl;
+    private String url;
 
     @Column(name = "datasource_username", nullable = false, length = 255)
-    private String datasourceUsername;
+    private String username;
 
     @Column(name = "datasource_password", nullable = false, length = 255)
-    private String datasourcePassword;
+    private String password;
 
     @Column(name = "datasource_driver_class", nullable = false, length = 255)
-    private String datasourceDriverClass;
+    private String driverClass;
 
     @Column(name = "datasource_max_pool_size", nullable = false)
-    private Integer datasourceMaxPoolSize = 10;
+    @Builder.Default
+    private Integer maxPoolSize = 10;
 
     @Column(name = "datasource_min_idle", nullable = false)
-    private Integer datasourceMinIdle = 1;
+    @Builder.Default
+    private Integer minIdle = 1;
 
     @Column(name = "datasource_max_life_time", nullable = false)
-    private Integer datasourceMaxLifeTime = 1800000;
+    @Builder.Default
+    private Integer maxLifeTime = 1800000;
 
     @Column(name = "datasource_connection_timeout", nullable = false)
-    private Integer datasourceConnectionTimeout = 30000;
+    @Builder.Default
+    private Integer connectionTimeout = 30000;
 
     @Column(name = "datasource_idle_timeout", nullable = false)
-    private Integer datasourceIdleTimeout = 600000;
+    @Builder.Default
+    private Integer idleTimeout = 600000;
 
     @Column(name = "datasource_pool_name", length = 100)
-    private String datasourcePoolName;
+    private String poolName;
 
     @Column(name = "is_active", nullable = false)
     private Boolean isActive = true;
