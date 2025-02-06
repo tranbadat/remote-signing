@@ -34,7 +34,11 @@ public class EncryptUtils {
         return new SecretKeySpec(decodedKey, 0, decodedKey.length, AES);
     }
 
-    private static byte[] getDecrypt(String cipherText, SecretKey key, String transformation)
+    public static String secretKeyToString(SecretKey key) {
+        return Base64.getEncoder().encodeToString(key.getEncoded());
+    }
+
+    private static byte[] decrypt(String cipherText, SecretKey key, String transformation)
             throws NoSuchAlgorithmException,
             NoSuchPaddingException, InvalidKeyException, InvalidAlgorithmParameterException, IllegalBlockSizeException,
             BadPaddingException {
