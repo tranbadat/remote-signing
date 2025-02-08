@@ -28,6 +28,7 @@ public class EncryptUtils {
     public static final int GCM_IV_LENGTH = 16;
     private static final int GCM_TAG_LENGTH = 128;
     public static final String AES = "AES";
+    private static final SecureRandom RANDOM = new SecureRandom();
 
     public static SecretKey stringToSecretKey(String encodedKey) {
         byte[] decodedKey = Base64.getDecoder().decode(encodedKey);
@@ -86,6 +87,38 @@ public class EncryptUtils {
         return Base64.getEncoder().encodeToString(concat(iv, cipherText));
     }
 
+
+    public static String encrypt(String plainText, SecretKey key) throws NoSuchPaddingException, NoSuchAlgorithmException,
+            IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
+        byte[] iv = genIV();
+
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        GCMParameterSpec parameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH, iv);
+        cipher.init(Cipher.ENCRYPT_MODE, key, parameterSpec);
+
+        byte[] cipherText = cipher.doFinal(plainText.getBytes());
+        byte[] cipherTextWithIv = new byte[GCM_IV_LENGTH + cipherText.length];
+        System.arraycopy(iv, 0, cipherTextWithIv, 0, GCM_IV_LENGTH);
+        System.arraycopy(cipherText, 0, cipherTextWithIv, GCM_IV_LENGTH, cipherText.length);
+
+        return Base64.getEncoder().encodeToString(cipherTextWithIv);
+    }
+
+    public static String decrypt(String cipherText, SecretKey key)
+            throws NoSuchPaddingException, NoSuchAlgorithmException,
+            IllegalBlockSizeException, BadPaddingException, InvalidAlgorithmParameterException, InvalidKeyException {
+        byte[] cipherTextWithIv = Base64.getDecoder().decode(cipherText);
+        byte[] iv = new byte[GCM_IV_LENGTH];
+        System.arraycopy(cipherTextWithIv, 0, iv, 0, GCM_IV_LENGTH);
+
+        Cipher cipher = Cipher.getInstance("AES/GCM/NoPadding");
+        GCMParameterSpec parameterSpec = new GCMParameterSpec(GCM_TAG_LENGTH, iv);
+        cipher.init(Cipher.DECRYPT_MODE, key, parameterSpec);
+
+        byte[] plainText = cipher.doFinal(cipherTextWithIv, GCM_IV_LENGTH, cipherTextWithIv.length - GCM_IV_LENGTH);
+        return new String(plainText);
+    }
+
     public static byte[] concat(byte[]... arrays) {
         int length = 0;
         for (byte[] array : arrays) {
@@ -102,8 +135,7 @@ public class EncryptUtils {
 
     public static byte[] genIV() {
         byte[] iv = new byte[GCM_IV_LENGTH];
-        SecureRandom random = new SecureRandom();
-        random.nextBytes(iv);
+        RANDOM.nextBytes(iv);
         return iv;
     }
 }
