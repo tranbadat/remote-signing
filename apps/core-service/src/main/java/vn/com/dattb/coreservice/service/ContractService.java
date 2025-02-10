@@ -1,5 +1,11 @@
 package vn.com.dattb.coreservice.service;
 
+import vn.com.dattb.coreservice.dto.PageDto;
+import vn.com.dattb.coreservice.dto.request.InitContractRequest;
+import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
+import vn.com.dattb.coreservice.dto.response.InitContractResponse;
+import vn.com.dattb.coreservice.dto.response.ListContractResponse;
+
 /**
  * ContractService
  * <p>
@@ -10,4 +16,15 @@ package vn.com.dattb.coreservice.service;
  * Description: ContractService is the service class for contract
  */
 public interface ContractService {
+
+    InitContractResponse init(InitContractRequest request);
+
+    PageDto<ListContractResponse> getList();
+
+    DetailContractResponse getDetail(Long id);
+
+    DetailContractResponse update(Long id, InitContractRequest request);
+
+    void delete(Long id);
+
 }
