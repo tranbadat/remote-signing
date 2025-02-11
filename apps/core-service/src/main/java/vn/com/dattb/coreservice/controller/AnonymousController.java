@@ -2,13 +2,11 @@ package vn.com.dattb.coreservice.controller;
 
 import jakarta.validation.Valid;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import vn.com.dattb.common.dto.BaseResponse;
 import vn.com.dattb.coreservice.dto.request.AccessCodeRequest;
 import vn.com.dattb.coreservice.dto.response.AccessCodeResponse;
+import vn.com.dattb.coreservice.dto.response.AccessTokenResponse;
 
 /**
  * AnonymousController
@@ -30,6 +28,47 @@ public class AnonymousController {
     public BaseResponse<AccessCodeResponse> getAccessCode(@Valid @RequestBody AccessCodeRequest request) {
         return new BaseResponse<>("00", "Success", AccessCodeResponse.builder()
                 .accessCode("123").build());
+    }
+
+    @PostMapping(
+            path = "/verify",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public BaseResponse<AccessTokenResponse> verifyAccessCode(@Valid @RequestBody AccessCodeRequest request) {
+        return new BaseResponse<>("00", "Success", AccessTokenResponse.builder()
+                .accessToken("123").build());
+    }
+
+    @PostMapping(
+            path = "/contracts/{referenceId}",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public BaseResponse<String> getDocuments(@Valid @PathVariable String referenceId) {
+        return new BaseResponse<>("00", "Success", "Document 1, Document 2");
+    }
+
+    @PostMapping(
+            path = "/contracts/{referenceId}/sign",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public BaseResponse<String> signDocument(@Valid @PathVariable String referenceId) {
+        return new BaseResponse<>("00", "Success", "Document 1, Document 2");
+    }
+
+    @PostMapping(
+            path = "/contracts/{referenceId}/download",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public BaseResponse<String> downloadDocument(@Valid @PathVariable String referenceId) {
+        return new BaseResponse<>("00", "Success", "Document 1, Document 2");
+    }
+
+    @PostMapping(
+            path = "/contracts/{referenceId}/preview",
+            consumes = {MediaType.APPLICATION_JSON_VALUE}
+    )
+    public BaseResponse<String> previewDocument(@Valid @PathVariable String referenceId) {
+        return new BaseResponse<>("00", "Success", "Document 1, Document 2");
     }
 
 }
