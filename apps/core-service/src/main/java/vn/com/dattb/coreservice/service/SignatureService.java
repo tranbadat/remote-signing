@@ -1,5 +1,9 @@
 package vn.com.dattb.coreservice.service;
 
+import vn.com.dattb.coreservice.dto.response.SignatureResponse;
+
+import java.util.List;
+
 /**
  * SignatureService
  * <p>
@@ -10,4 +14,7 @@ package vn.com.dattb.coreservice.service;
  * Description: SignatureService is the service class for signature
  */
 public interface SignatureService {
+    SignatureResponse getDetailSignature(Long signatureId);
+
+    List<SignatureResponse> getAllSignatures();
 }

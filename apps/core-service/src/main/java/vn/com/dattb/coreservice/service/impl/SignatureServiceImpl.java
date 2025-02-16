@@ -2,7 +2,10 @@ package vn.com.dattb.coreservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import vn.com.dattb.coreservice.dto.response.SignatureResponse;
 import vn.com.dattb.coreservice.service.SignatureService;
+
+import java.util.List;
 
 /**
  * SignatureServiceImpl is the service class for signature service
@@ -16,4 +19,13 @@ import vn.com.dattb.coreservice.service.SignatureService;
 @Service
 @Slf4j
 public class SignatureServiceImpl implements SignatureService {
+    @Override
+    public SignatureResponse getDetailSignature(Long signatureId) {
+        return null;
+    }
+
+    @Override
+    public List<SignatureResponse> getAllSignatures() {
+        return List.of();
+    }
 }
