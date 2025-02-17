@@ -16,4 +16,13 @@ import vn.com.dattb.coreservice.service.SignatureConfigService;
 @Service
 @Slf4j
 public class SignatureConfigServiceImpl implements SignatureConfigService {
+    @Override
+    public void deleteSignatureConfig(Long signatureConfigId) {
+
+    }
+
+    @Override
+    public void updateSignatureConfig(Long signatureConfigId) {
+
+    }
 }
