@@ -10,4 +10,7 @@ package vn.com.dattb.coreservice.service;
  * Description: SignatureConfigService is the service class for signature config
  */
 public interface SignatureConfigService {
+    void deleteSignatureConfig(Long signatureConfigId);
+
+    void updateSignatureConfig(Long signatureConfigId);
 }
