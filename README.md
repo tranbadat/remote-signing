@@ -70,6 +70,8 @@ The project is built using the following technologies:
 - **Database:** PostgreSQL/MySQL
 - **Distributed Locking:** Redisson
 - **Authentication:** Keycloak
+- **Storage:** MinIO/S3
+- **Containerization:** Docker
 
 ---
 
