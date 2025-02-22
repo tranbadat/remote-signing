@@ -1,5 +1,9 @@
 package vn.com.dattb.coreservice.repository;
 
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
+
 /**
  * StorageRepository
  * <p>
@@ -10,6 +14,8 @@ package vn.com.dattb.coreservice.repository;
  * Description:
  */
 public interface StorageRepository {
+    void save(String filePath, MultipartFile file) throws IOException;
+
     void save(String filePath, byte[] file);
 
     void delete(String filePath);
