@@ -14,8 +14,11 @@ import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
 import vn.com.dattb.coreservice.dto.response.HistoriesContractResponse;
 import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.dto.response.ListContractResponse;
+import vn.com.dattb.coreservice.service.UploaderService;
 
 import java.util.List;
+
+import static vn.com.dattb.coreservice.exception.ErrorCode.SUCCESS;
 
 /**
  * ContractController
@@ -30,13 +33,18 @@ import java.util.List;
 @RequestMapping("/v1/contracts")
 public class ContractController {
 
+    private final UploaderService uploaderService;
+
+    public ContractController(UploaderService uploaderService) {
+        this.uploaderService = uploaderService;
+    }
+
     @PostMapping(
             path = "/upload",
             consumes = {MediaType.MULTIPART_FORM_DATA_VALUE}
     )
     public BaseResponse<InitContractResponse> initContract(@RequestPart MultipartFile file) {
-        return new BaseResponse<>("00", "Success", InitContractResponse.builder()
-                .contractId("123").hasSignature(false).build());
+        return new BaseResponse<>(SUCCESS.code(), uploaderService.uploadFile(file));
     }
 
     @PostMapping(

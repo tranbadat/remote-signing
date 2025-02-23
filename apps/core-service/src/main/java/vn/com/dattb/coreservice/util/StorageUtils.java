@@ -1,5 +1,7 @@
 package vn.com.dattb.coreservice.util;
 
+import java.time.LocalDateTime;
+
 /**
  * StorageUtils
  * <p>
@@ -15,7 +17,12 @@ public class StorageUtils {
     }
 
     public static String generatePath(String... paths) {
+        LocalDateTime now = LocalDateTime.now();
+        String year = String.valueOf(now.getYear());
+        String month = String.valueOf(now.getMonthValue());
+        String day = String.valueOf(now.getDayOfMonth());
         StringBuilder path = new StringBuilder();
+        path.append(year).append("/").append(month).append("/").append(day).append("/");
         for (String p : paths) {
             path.append(p).append("/");
         }

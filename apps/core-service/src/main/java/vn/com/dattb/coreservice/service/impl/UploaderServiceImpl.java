@@ -4,7 +4,9 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.dattb.coreservice.context.ClientContext;
+import vn.com.dattb.coreservice.context.TenantContext;
 import vn.com.dattb.coreservice.context.UserContext;
+import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.repository.StorageRepository;
 import vn.com.dattb.coreservice.service.UploaderService;
 import vn.com.dattb.coreservice.util.StorageUtils;
@@ -31,21 +33,23 @@ public class UploaderServiceImpl implements UploaderService {
     }
 
     @Override
-    public void uploadFile(MultipartFile file) {
+    public InitContractResponse uploadFile(MultipartFile file) {
         try {
             if (isNull(file) || file.isEmpty()) {
                 log.warn("File is empty");
                 throw new IllegalArgumentException("File is empty");
             }
             log.info("Uploading file: {}", file.getOriginalFilename());
+            String tenantId = TenantContext.getCurrentTenant();
             String clientId = ClientContext.getCurrentClient();
             String userId = UserContext.getCurrentUser();
-            String filePath = StorageUtils.generatePath(userId, file.getOriginalFilename());
-            storageRepository.save(filePath, file.getBytes());
+            String filePath = StorageUtils.generatePath(tenantId, clientId, userId, file.getOriginalFilename());
+            storageRepository.save(filePath, file);
             log.info("Client ID: {}", clientId);
             // Do something
         } catch (Exception e) {
             log.error("Error uploading file", e);
         }
+        return InitContractResponse.builder().build();
     }
 }

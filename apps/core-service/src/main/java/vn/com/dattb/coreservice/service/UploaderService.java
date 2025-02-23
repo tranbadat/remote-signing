@@ -1,6 +1,7 @@
 package vn.com.dattb.coreservice.service;
 
 import org.springframework.web.multipart.MultipartFile;
+import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 
 /**
  * UploaderService
@@ -12,5 +13,5 @@ import org.springframework.web.multipart.MultipartFile;
  * Description: UploaderService is the service class for uploader service
  */
 public interface UploaderService {
-    void uploadFile(MultipartFile file);
+    InitContractResponse uploadFile(MultipartFile file);
 }
