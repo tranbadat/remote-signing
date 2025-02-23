@@ -38,6 +38,10 @@ public class BaseResponse<T> {
         this.data = data;
     }
 
+    public BaseResponse<T> ok(T data) {
+        return BaseResponse.<T>builder().code("00").data(data).build();
+    }
+
     public boolean isSuccess() {
         return "00".equals(code);
     }
