@@ -62,11 +62,16 @@ public class S3StorageRepositoryImpl implements StorageRepository {
 
     @Override
     public void delete(String filePath) {
+        log.info("Deleting file: {}", filePath);
+        s3Client.deleteObject(b -> b.bucket(BUCKET_NAME).key(filePath));
+        log.info("Deleted file: {}", filePath);
         // Delete file from S3
     }
 
     @Override
     public byte[] get(String filePath) {
+        log.info("Getting file: {}", filePath);
+        s3Client.getObject(b -> b.bucket(BUCKET_NAME).key(filePath));
         // Get file from S3
         return new byte[0];
     }
