@@ -14,6 +14,7 @@ import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
 import vn.com.dattb.coreservice.dto.response.HistoriesContractResponse;
 import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.dto.response.ListContractResponse;
+import vn.com.dattb.coreservice.service.DownloaderService;
 import vn.com.dattb.coreservice.service.UploaderService;
 
 import java.util.List;
@@ -34,9 +35,11 @@ import static vn.com.dattb.coreservice.exception.ErrorCode.SUCCESS;
 public class ContractController {
 
     private final UploaderService uploaderService;
+    private final DownloaderService downloaderService;
 
-    public ContractController(UploaderService uploaderService) {
+    public ContractController(UploaderService uploaderService, DownloaderService downloaderService) {
         this.uploaderService = uploaderService;
+        this.downloaderService = downloaderService;
     }
 
     @PostMapping(
@@ -86,7 +89,7 @@ public class ContractController {
         return ResponseEntity.ok()
                 .contentType(MediaType.APPLICATION_OCTET_STREAM)
                 .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"contract.pdf\"")
-                .body(new ByteArrayResource(new byte[]{}));
+                .body(new ByteArrayResource(downloaderService.downloadFile(id)));
     }
 
     @PutMapping(path = "/{id}/preview")
