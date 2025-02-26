@@ -53,6 +53,9 @@ public class Contract {
     @Column(name = "contract_description", columnDefinition = "TEXT")
     private String contractDescription;
 
+    @Column(name = "file_path", nullable = false, length = 255)
+    private String filePath;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
