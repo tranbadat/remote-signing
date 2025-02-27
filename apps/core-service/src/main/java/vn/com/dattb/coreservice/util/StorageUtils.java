@@ -16,6 +16,8 @@ public class StorageUtils {
         throw new IllegalStateException("Utility class");
     }
 
+    private static final String TEMP_PATH = "temp/";
+
     public static String generatePath(String... paths) {
         LocalDateTime now = LocalDateTime.now();
         String year = String.valueOf(now.getYear());
@@ -27,5 +29,15 @@ public class StorageUtils {
             path.append(p).append("/");
         }
         return path.toString();
+    }
+
+    public static String makeLocalTempPath(String path) {
+        LocalDateTime now = LocalDateTime.now();
+        String year = String.valueOf(now.getYear());
+        String month = String.valueOf(now.getMonthValue());
+        String day = String.valueOf(now.getDayOfMonth());
+        String unique = String.valueOf(System.currentTimeMillis());
+        String fileName = path.substring(path.lastIndexOf("/") + 1);
+        return "temp/" + year + "/" + month + "/" + day + "/" + unique + "_" + fileName;
     }
 }
