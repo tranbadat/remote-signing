@@ -10,4 +10,22 @@ package vn.com.dattb.coreservice.service;
  * Description: AnonymousService is the service class for anonymous service
  */
 public interface AnonymousService {
+
+    /**
+     * generateAccessCode is the method for generating access code
+     *
+     * @param username    the username
+     * @param referenceId the reference id
+     * @return the access code
+     */
+    String generateAccessCode(String username, String referenceId);
+
+    /**
+     * validateAccessCode is the method for validating access code
+     *
+     * @param accessCode  the access code
+     * @param referenceId the reference id
+     * @return true if the access code is valid, otherwise false
+     */
+    boolean validateAccessCode(String accessCode, String referenceId);
 }
