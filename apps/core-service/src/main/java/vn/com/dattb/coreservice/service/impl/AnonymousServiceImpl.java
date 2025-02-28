@@ -16,4 +16,13 @@ import vn.com.dattb.coreservice.service.AnonymousService;
 @Service
 @Slf4j
 public class AnonymousServiceImpl implements AnonymousService {
+    @Override
+    public String generateAccessCode(String username, String referenceId) {
+        return "";
+    }
+
+    @Override
+    public boolean validateAccessCode(String accessCode, String referenceId) {
+        return false;
+    }
 }

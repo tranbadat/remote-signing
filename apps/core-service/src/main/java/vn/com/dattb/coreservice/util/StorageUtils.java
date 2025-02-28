@@ -38,6 +38,6 @@ public class StorageUtils {
         String day = String.valueOf(now.getDayOfMonth());
         String unique = String.valueOf(System.currentTimeMillis());
         String fileName = path.substring(path.lastIndexOf("/") + 1);
-        return "temp/" + year + "/" + month + "/" + day + "/" + unique + "_" + fileName;
+        return TEMP_PATH + year + "/" + month + "/" + day + "/" + unique + "_" + fileName;
     }
 }
