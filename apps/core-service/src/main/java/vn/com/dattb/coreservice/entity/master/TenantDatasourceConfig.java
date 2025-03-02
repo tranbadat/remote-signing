@@ -72,12 +72,15 @@ public class TenantDatasourceConfig {
     private String poolName;
 
     @Column(name = "is_active", nullable = false)
+    @Builder.Default
     private Boolean isActive = true;
 
     @Column(name = "database_type", length = 10)
+    @Builder.Default
     private String databaseType = "postgres";
 
     @Column(name = "is_shared")
+    @Builder.Default
     private Boolean isShared = true;
 
     @CreationTimestamp
@@ -85,6 +88,7 @@ public class TenantDatasourceConfig {
     private LocalDateTime createdAt;
 
     @Column(name = "created_by", nullable = false, length = 255)
+    @Builder.Default
     private String createdBy = "system";
 
     @UpdateTimestamp
@@ -92,6 +96,7 @@ public class TenantDatasourceConfig {
     private LocalDateTime updatedAt;
 
     @Column(name = "updated_by", nullable = false, length = 255)
+    @Builder.Default
     private String updatedBy = "system";
 
     @Column(name = "deleted_at")
@@ -101,5 +106,6 @@ public class TenantDatasourceConfig {
     private String deletedBy;
 
     @Column(name = "is_deleted", nullable = false)
+    @Builder.Default
     private Boolean isDeleted = false;
 }
