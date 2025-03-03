@@ -1,5 +1,9 @@
 package vn.com.dattb.coreservice.service;
 
+import vn.com.dattb.coreservice.dto.SignerFlowDto;
+
+import java.util.List;
+
 /**
  * SigningFlowService
  * <p>
@@ -10,4 +14,6 @@ package vn.com.dattb.coreservice.service;
  * Description: SigningFlowService is the service class for signing flow service
  */
 public interface SigningFlowService {
+
+    List<SignerFlowDto> getNextHandler(Long documentId);
 }
