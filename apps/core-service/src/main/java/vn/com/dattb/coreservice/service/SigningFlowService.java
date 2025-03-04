@@ -16,4 +16,8 @@ import java.util.List;
 public interface SigningFlowService {
 
     List<SignerFlowDto> getNextHandler(Long documentId);
+
+    List<SignerFlowDto> getPreviousHandler(Long documentId);
+
+    List<SignerFlowDto> getSignerFlow(Long documentId);
 }
