@@ -9,11 +9,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.dattb.common.dto.BaseResponse;
+import vn.com.dattb.coreservice.dto.PageDto;
 import vn.com.dattb.coreservice.dto.request.InitContractRequest;
 import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
 import vn.com.dattb.coreservice.dto.response.HistoriesContractResponse;
 import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.dto.response.ListContractResponse;
+import vn.com.dattb.coreservice.service.ContractService;
 import vn.com.dattb.coreservice.service.DownloaderService;
 import vn.com.dattb.coreservice.service.UploaderService;
 
@@ -36,10 +38,13 @@ public class ContractController {
 
     private final UploaderService uploaderService;
     private final DownloaderService downloaderService;
+    private final ContractService contractService;
 
-    public ContractController(UploaderService uploaderService, DownloaderService downloaderService) {
+    public ContractController(UploaderService uploaderService, DownloaderService downloaderService,
+                              ContractService contractService) {
         this.uploaderService = uploaderService;
         this.downloaderService = downloaderService;
+        this.contractService = contractService;
     }
 
     @PostMapping(
@@ -55,33 +60,29 @@ public class ContractController {
             consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public BaseResponse<InitContractResponse> createContract(@Valid @RequestBody InitContractRequest request) {
-        return new BaseResponse<>("00", "Success", InitContractResponse.builder()
-                .contractId("123").hasSignature(false).build());
+        return new BaseResponse<>(SUCCESS.code(), contractService.init(request));
     }
 
     @PostMapping("/list")
-    public BaseResponse<List<ListContractResponse>> listContract() {
-        return new BaseResponse<>("00", "Success", List.of(ListContractResponse.builder()
-                .id("123").name("Contract 1").status("Draft").createdDate("2025-01-14").createdBy("admin").build()));
+    public BaseResponse<PageDto<ListContractResponse>> listContract() {
+        return new BaseResponse<>(SUCCESS.code(), contractService.getList());
     }
 
     @GetMapping("/{id}")
-    public BaseResponse<DetailContractResponse> getContract(@PathVariable String id) {
-        return new BaseResponse<>("00", "Success", DetailContractResponse.builder()
-                .id("123").name("Contract 1").status("Draft").createdDate("2025-01-14").createdBy("admin").build());
+    public BaseResponse<DetailContractResponse> getContract(@PathVariable Long id) {
+        return new BaseResponse<>(SUCCESS.code(), contractService.getDetail(id));
     }
 
     @PutMapping("/{id}")
-    public BaseResponse<DetailContractResponse> updateContract(@PathVariable String id,
+    public BaseResponse<DetailContractResponse> updateContract(@PathVariable Long id,
                                                                @Valid @RequestBody InitContractRequest request) {
-        return new BaseResponse<>("00", "Success", DetailContractResponse.builder()
-                .id("123").name("Contract 1").status("Draft").createdDate("2025-01-14").createdBy("admin").build());
+        return new BaseResponse<>(SUCCESS.code(), contractService.update(id, request));
     }
 
     @DeleteMapping("/{id}")
-    public BaseResponse<DetailContractResponse> deleteContract(@PathVariable String id) {
-        return new BaseResponse<>("00", "Success", DetailContractResponse.builder()
-                .id("123").name("Contract 1").status("Draft").createdDate("2025-01-14").createdBy("admin").build());
+    public BaseResponse<Void> deleteContract(@PathVariable Long id) {
+        contractService.delete(id);
+        return new BaseResponse<Void>().ok();
     }
 
     @GetMapping(path = "/{id}/download")

@@ -42,6 +42,10 @@ public class BaseResponse<T> {
         return BaseResponse.<T>builder().code("00").data(data).build();
     }
 
+    public BaseResponse<Void> ok() {
+        return BaseResponse.<Void>builder().code("00").build();
+    }
+
     public boolean isSuccess() {
         return "00".equals(code);
     }
