@@ -3,8 +3,11 @@ package vn.com.dattb.coreservice.service;
 import vn.com.dattb.coreservice.dto.PageDto;
 import vn.com.dattb.coreservice.dto.request.InitContractRequest;
 import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
+import vn.com.dattb.coreservice.dto.response.HistoriesContractResponse;
 import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.dto.response.ListContractResponse;
+
+import java.util.List;
 
 /**
  * ContractService
@@ -27,4 +30,5 @@ public interface ContractService {
 
     void delete(Long id);
 
+    List<HistoriesContractResponse> getHistories(Long id);
 }

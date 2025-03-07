@@ -5,9 +5,12 @@ import org.springframework.stereotype.Service;
 import vn.com.dattb.coreservice.dto.PageDto;
 import vn.com.dattb.coreservice.dto.request.InitContractRequest;
 import vn.com.dattb.coreservice.dto.response.DetailContractResponse;
+import vn.com.dattb.coreservice.dto.response.HistoriesContractResponse;
 import vn.com.dattb.coreservice.dto.response.InitContractResponse;
 import vn.com.dattb.coreservice.dto.response.ListContractResponse;
 import vn.com.dattb.coreservice.service.ContractService;
+
+import java.util.List;
 
 /**
  * ContractServiceImpl is the service class for contract
@@ -45,5 +48,10 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public void delete(Long id) {
 
+    }
+
+    @Override
+    public List<HistoriesContractResponse> getHistories(Long id) {
+        return List.of();
     }
 }

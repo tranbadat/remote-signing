@@ -120,9 +120,7 @@ public class ContractController {
 
     @GetMapping(path = "/{id}/histories")
     public BaseResponse<List<HistoriesContractResponse>> getHistories(@PathVariable Long id) {
-        return new BaseResponse<>("00", "Success", List.of(HistoriesContractResponse.builder()
-                .id("123").name("Contract 1").status("Draft").createdDate("2025-01-14")
-                .createdBy("admin").action("Create").description("Create contract").build()));
+        return new BaseResponse<>(SUCCESS.code(), contractService.getHistories(id));
     }
 
 }
