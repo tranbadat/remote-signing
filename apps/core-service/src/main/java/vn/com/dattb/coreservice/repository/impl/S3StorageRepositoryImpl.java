@@ -58,6 +58,8 @@ public class S3StorageRepositoryImpl implements StorageRepository {
     @Override
     public void save(String filePath, byte[] file) {
         // Save file to S3
+        s3Client.putObject(b -> b.bucket(BUCKET_NAME)
+                .key(filePath), software.amazon.awssdk.core.sync.RequestBody.fromBytes(file));
     }
 
     @Override

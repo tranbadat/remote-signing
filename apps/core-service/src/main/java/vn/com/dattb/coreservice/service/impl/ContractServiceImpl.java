@@ -46,4 +46,9 @@ public class ContractServiceImpl implements ContractService {
     public void delete(Long id) {
 
     }
+
+    @Override
+    public String getObjectPreview(Long id) {
+        return null;
+    }
 }
