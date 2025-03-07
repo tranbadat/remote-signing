@@ -30,5 +30,6 @@ public interface ContractService {
 
     void delete(Long id);
 
+    String getObjectPreview(Long id);
     List<HistoriesContractResponse> getHistories(Long id);
 }

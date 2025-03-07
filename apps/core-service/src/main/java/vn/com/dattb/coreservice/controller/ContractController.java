@@ -95,7 +95,7 @@ public class ContractController {
 
     @PutMapping(path = "/{id}/preview")
     public BaseResponse<String> previewContract(@PathVariable Long id) {
-        return new BaseResponse<>("00", "Success", "Document 1, Document 2");
+        return new BaseResponse<>(SUCCESS.code(), contractService.getObjectPreview(id));
     }
 
     @PostMapping(path = "/{id}/sign")

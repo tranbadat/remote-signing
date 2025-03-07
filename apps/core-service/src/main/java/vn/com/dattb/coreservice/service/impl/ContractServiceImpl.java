@@ -51,6 +51,11 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public String getObjectPreview(Long id) {
+        return null;
+    }
+
+    @Override
     public List<HistoriesContractResponse> getHistories(Long id) {
         return List.of();
     }
