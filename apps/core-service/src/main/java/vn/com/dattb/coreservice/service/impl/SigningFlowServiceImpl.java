@@ -24,4 +24,14 @@ public class SigningFlowServiceImpl implements SigningFlowService {
     public List<SignerFlowDto> getNextHandler(Long documentId) {
         return List.of();
     }
+
+    @Override
+    public List<SignerFlowDto> getPreviousHandler(Long documentId) {
+        return List.of();
+    }
+
+    @Override
+    public List<SignerFlowDto> getSignerFlow(Long documentId) {
+        return List.of();
+    }
 }
