@@ -1,5 +1,8 @@
 package vn.com.dattb.coreservice.service;
 
+import vn.com.dattb.coreservice.dto.request.AccessCodeRequest;
+import vn.com.dattb.coreservice.dto.response.AccessTokenResponse;
+
 /**
  * AnonymousService
  * <p>
@@ -28,4 +31,6 @@ public interface AnonymousService {
      * @return true if the access code is valid, otherwise false
      */
     boolean validateAccessCode(String accessCode, String referenceId);
+
+    AccessTokenResponse verify(AccessCodeRequest request);
 }

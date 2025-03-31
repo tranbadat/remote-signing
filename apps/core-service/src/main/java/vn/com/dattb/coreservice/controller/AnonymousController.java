@@ -7,6 +7,7 @@ import vn.com.dattb.common.dto.BaseResponse;
 import vn.com.dattb.coreservice.dto.request.AccessCodeRequest;
 import vn.com.dattb.coreservice.dto.response.AccessCodeResponse;
 import vn.com.dattb.coreservice.dto.response.AccessTokenResponse;
+import vn.com.dattb.coreservice.service.AnonymousService;
 
 /**
  * AnonymousController
@@ -20,6 +21,12 @@ import vn.com.dattb.coreservice.dto.response.AccessTokenResponse;
 @RestController
 @RequestMapping("/v1/anonymous")
 public class AnonymousController {
+
+    private final AnonymousService anonymousService;
+
+    public AnonymousController(AnonymousService anonymousService) {
+        this.anonymousService = anonymousService;
+    }
 
     @PostMapping(
             path = "/access-code",
@@ -35,8 +42,7 @@ public class AnonymousController {
             consumes = {MediaType.APPLICATION_JSON_VALUE}
     )
     public BaseResponse<AccessTokenResponse> verifyAccessCode(@Valid @RequestBody AccessCodeRequest request) {
-        return new BaseResponse<>("00", "Success", AccessTokenResponse.builder()
-                .accessToken("123").build());
+        return new BaseResponse<>("00", "Success", anonymousService.verify(request));
     }
 
     @PostMapping(

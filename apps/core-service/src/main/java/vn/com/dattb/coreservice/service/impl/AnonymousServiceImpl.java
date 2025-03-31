@@ -2,6 +2,8 @@ package vn.com.dattb.coreservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import vn.com.dattb.coreservice.dto.request.AccessCodeRequest;
+import vn.com.dattb.coreservice.dto.response.AccessTokenResponse;
 import vn.com.dattb.coreservice.service.AnonymousService;
 
 /**
@@ -24,5 +26,11 @@ public class AnonymousServiceImpl implements AnonymousService {
     @Override
     public boolean validateAccessCode(String accessCode, String referenceId) {
         return false;
+    }
+
+    @Override
+    public AccessTokenResponse verify(AccessCodeRequest request) {
+        return AccessTokenResponse.builder()
+                .accessToken("123").build();
     }
 }
