@@ -1,0 +1,62 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!-- Added the table contract -->
+    <changeSet id="20250119210000-1" author="dattb">
+        <createTable tableName="contract">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="contract_number" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_type" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_status" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_start_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_end_date" type="TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_value" type="DECIMAL(19,2)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_currency" type="VARCHAR(10)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="contract_description" type="TEXT">
+                <constraints nullable="true"/>
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <insert tableName="contract">
+            <column name="contract_number" value="CONTRACT-001"/>
+            <column name="contract_name" value="Contract 1"/>
+            <column name="contract_type" value="Type 1"/>
+            <column name="contract_status" value="Active"/>
+            <column name="contract_start_date" value="2025-01-19 21:00:00"/>
+            <column name="contract_end_date" value="2025-01-19 21:00:00"/>
+            <column name="contract_value" value="1000000.00"/>
+            <column name="contract_currency" value="USD"/>
+            <column name="contract_description" value="Description 1"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>

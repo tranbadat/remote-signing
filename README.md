@@ -13,7 +13,8 @@
 
 ---
 ## 📚 **How to Get Started**
-See the [Getting Started Guide](HELP.md) for detailed instructions on setting up the project.
+See the [Getting Started Guide](docs/getting-started.md) for detailed instructions on setting up the project.
+See the [System Design & Architecture](docs/System-design-architect.md) for an overview of the project's design.
 
 ---
 <h2 id="project-overview">🚀 <b>Project Overview</b></h2>
@@ -69,6 +70,8 @@ The project is built using the following technologies:
 - **Database:** PostgreSQL/MySQL
 - **Distributed Locking:** Redisson
 - **Authentication:** Keycloak
+- **Storage:** MinIO/S3
+- **Containerization:** Docker
 
 ---
 

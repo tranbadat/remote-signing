@@ -1,0 +1,6 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <include file="classpath:db/master/changelog/20250119210000_dattb_create_table_tenant_datasource_config.xml" relativeToChangelogFile="false" />
+
+</databaseChangeLog>

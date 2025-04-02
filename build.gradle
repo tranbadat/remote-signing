@@ -1,3 +1,5 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
 plugins {
     id 'java'
     id 'org.springframework.boot' version '3.4.0'
@@ -13,21 +15,37 @@ java {
     }
 }
 
-configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
+ext {
+    commonsTextVersion = '1.10.0'
+    bouncyCastleVersion = "1.78"
+    modelmapperVersion = "3.1.0"
+    commonsLang3Version = "3.12.0"
+    okhttpVersion = "13.5"
+    jedisVersion = "5.0.2"
+    gsonVersion = "2.10.1"
+    googleOAuth2Version = "1.18.0"
+    postgresVersion = "42.7.2"
+    liquibaseVersion = "4.31.0"
+    awsSdkVersion = "2.25.36"
+}
+
+allprojects {
+    apply plugin: 'java'
+    apply plugin: 'jacoco'
+
+    repositories {
+        mavenCentral()
     }
 }
 
-repositories {
-    mavenCentral()
-}
+def springProjects = [
+        project('apps:core-service'),
+        project('apps:sign-server'),
+        project('apps:ssa-service'),
+        project('apps:as-service')
+]
 
-ext {
-    set('springCloudVersion', "2024.0.0")
-}
-
-subprojects {
+configure(springProjects) {
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
     apply plugin: 'io.spring.dependency-management'
@@ -35,35 +53,88 @@ subprojects {
     group = 'vn.com.dattb'
     version = '1.0.0'
 
+    java {
+        toolchain {
+            languageVersion = JavaLanguageVersion.of(17)
+        }
+    }
+
     repositories {
         mavenCentral()
     }
-}
 
-dependencies {
-    implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-web'
-    implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
-    implementation 'org.springframework.boot:spring-boot-starter-logging'
-    compileOnly 'org.projectlombok:lombok'
-    developmentOnly 'org.springframework.boot:spring-boot-devtools'
-    developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
-    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-    annotationProcessor 'org.projectlombok:lombok'
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-}
+    sourceCompatibility = '17'
 
-dependencyManagement {
-    imports {
-        mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    ext {
+        set('springCloudVersion', "2024.0.0")
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+        implementation 'org.springframework.boot:spring-boot-starter-actuator'
+        implementation 'org.springframework.boot:spring-boot-starter-web'
+//        implementation 'org.springframework.cloud:spring-cloud-starter-vault-config'
+        implementation 'org.springframework.boot:spring-boot-starter-logging'
+        compileOnly 'org.projectlombok:lombok'
+        developmentOnly 'org.springframework.boot:spring-boot-devtools'
+//        developmentOnly 'org.springframework.boot:spring-boot-docker-compose'
+        annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+        annotationProcessor 'org.projectlombok:lombok'
+        testImplementation 'org.springframework.boot:spring-boot-starter-test'
+        testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+        implementation "org.apache.commons:commons-text:${commonsTextVersion}"
+        implementation 'org.springframework.boot:spring-boot-starter-validation'
     }
 }
 
-tasks.bootJar {
-    archiveFileName = "${project.name}.jar"
+def libProjects = [
+        project('libs:common')
+]
+
+configure(libProjects) {
+    apply plugin: 'io.spring.dependency-management'
+    apply plugin: 'java-library'
+
+    sourceCompatibility = '17'
+
+    configurations {
+        compileOnly {
+            extendsFrom annotationProcessor
+        }
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom SpringBootPlugin.BOM_COORDINATES
+        }
+    }
+
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        implementation "org.springframework.boot:spring-boot-starter-web"
+        implementation "commons-io:commons-io:2.11.0"
+        implementation "org.apache.commons:commons-lang3:${commonsLang3Version}"
+        compileOnly "org.projectlombok:lombok"
+        annotationProcessor "org.projectlombok:lombok"
+        testCompileOnly "org.projectlombok:lombok"
+        testAnnotationProcessor "org.projectlombok:lombok"
+    }
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+//no main class name in root project
+tasks.named('bootJar') {
+    enabled = false
 }

@@ -1,0 +1,99 @@
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!-- Added the entity Car -->
+    <changeSet id="20250119210000-1" author="dattb">
+        <createTable tableName="tenant_datasource_config">
+            <column name="id" type="BIGINT" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="tenant_id" type="VARCHAR(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_name" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_url" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_username" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_password" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_driver_class" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_max_pool_size" type="INTEGER" defaultValue="10">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_min_idle" type="INTEGER" defaultValue="1">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_max_life_time" type="INTEGER" defaultValue="1800000">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_connection_timeout" type="INTEGER" defaultValue="30000">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_idle_timeout" type="INTEGER" defaultValue="600000">
+                <constraints nullable="false"/>
+            </column>
+            <column name="datasource_pool_name" type="VARCHAR(100)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_active" type="BOOLEAN" defaultValue="true"/>
+            <column name="database_type" type="VARCHAR(10)" defaultValue="postgres">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_shared" type="BOOLEAN" defaultValue="true">
+            </column>
+            <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="created_by" type="VARCHAR(255)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
+                <constraints nullable="false"/>
+            </column>
+            <column name="updated_by" type="VARCHAR(255)" defaultValue="system">
+                <constraints nullable="false"/>
+            </column>
+            <column name="deleted_at" type="TIMESTAMP">
+                <constraints nullable="true"/>
+            </column>
+            <column name="deleted_by" type="VARCHAR(255)">
+                <constraints nullable="true"/>
+            </column>
+            <column name="is_deleted" type="BOOLEAN" defaultValue="false">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <createIndex tableName="tenant_datasource_config" indexName="idx_tenant_datasource_config_tenant_id"
+                     unique="false">
+            <column name="tenant_id"/>
+        </createIndex>
+        <insert tableName="tenant_datasource_config">
+            <column name="tenant_id" value="default"/>
+            <column name="datasource_name" value="e-contract-tenant"/>
+            <column name="datasource_url" value="jdbc:postgresql://postgres:5432/e-contract-tenant"/>
+            <column name="datasource_username" value="dattb"/>
+            <column name="datasource_password" value="dattb123"/>
+            <column name="datasource_driver_class" value="org.postgresql.Driver"/>
+            <column name="datasource_max_pool_size" valueNumeric="10"/>
+            <column name="datasource_min_idle" valueNumeric="1"/>
+            <column name="datasource_max_life_time" valueNumeric="1800000"/>
+            <column name="datasource_connection_timeout" valueNumeric="30000"/>
+            <column name="datasource_idle_timeout" valueNumeric="600000"/>
+            <column name="datasource_pool_name" value="default"/>
+            <column name="is_active" valueBoolean="true"/>
+            <column name="database_type" value="postgres"/>
+            <column name="created_at" value="2025-01-19 21:00:00"/>
+            <column name="created_by" value="system"/>
+            <column name="updated_at" value="2025-01-19 21:00:00"/>
+            <column name="updated_by" value="system"/>
+            <column name="is_deleted" valueBoolean="false"/>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
