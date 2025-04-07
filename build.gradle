@@ -39,7 +39,7 @@ allprojects {
 }
 
 def springProjects = [
-        project('apps:core-service'),
+        project('apps:e-sign-service'),
         project('apps:sign-server'),
         project('apps:ssa-service'),
         project('apps:as-service')
