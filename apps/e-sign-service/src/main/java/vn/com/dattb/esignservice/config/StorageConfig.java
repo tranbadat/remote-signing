@@ -24,13 +24,13 @@ import java.net.URI;
 @Configuration
 public class StorageConfig {
 
-    @Value("${storage.endpoint:#{null}}")
+    @Value("${storage.endpoint:http://localhost:9000/minio}")
     private String endpoint;
 
-    @Value("${storage.accessKey:#{null}}")
+    @Value("${storage.accessKey:minio}")
     private String accessKey;
 
-    @Value("${storage.secretKey:#{null}")
+    @Value("${storage.secretKey:minio123")
     private String secretKey;
 
     @Value("${storage.region:us-east-1}")

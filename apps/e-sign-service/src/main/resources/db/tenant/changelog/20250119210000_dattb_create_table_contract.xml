@@ -7,33 +7,22 @@
             <column name="id" type="BIGINT" autoIncrement="true">
                 <constraints primaryKey="true" nullable="false"/>
             </column>
-            <column name="contract_number" type="VARCHAR(50)">
+            <column name="contract_number" type="VARCHAR(50)"/>
+            <column name="name" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contract_name" type="VARCHAR(255)">
+            <column name="type" type="VARCHAR(50)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contract_type" type="VARCHAR(255)">
+            <column name="status" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
-            <column name="contract_status" type="VARCHAR(255)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contract_start_date" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contract_end_date" type="TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contract_value" type="DECIMAL(19,2)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contract_currency" type="VARCHAR(10)">
-                <constraints nullable="false"/>
-            </column>
-            <column name="contract_description" type="TEXT">
-                <constraints nullable="true"/>
-            </column>
+            <column name="start_date" type="TIMESTAMP"/>
+            <column name="end_date" type="TIMESTAMP"/>
+            <column name="value" type="DECIMAL(19,2)"/>
+            <column name="currency" type="VARCHAR(10)"/>
+            <column name="description" type="TEXT"/>
+            <column name="signing_at" type="TIMESTAMP" />
             <column name="created_at" type="TIMESTAMP" defaultValueComputed="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
@@ -49,14 +38,14 @@
         </createTable>
         <insert tableName="contract">
             <column name="contract_number" value="CONTRACT-001"/>
-            <column name="contract_name" value="Contract 1"/>
-            <column name="contract_type" value="Type 1"/>
-            <column name="contract_status" value="Active"/>
-            <column name="contract_start_date" value="2025-01-19 21:00:00"/>
-            <column name="contract_end_date" value="2025-01-19 21:00:00"/>
-            <column name="contract_value" value="1000000.00"/>
-            <column name="contract_currency" value="USD"/>
-            <column name="contract_description" value="Description 1"/>
+            <column name="name" value="Contract 1"/>
+            <column name="type" value="Type 1"/>
+            <column name="status" value="Active"/>
+            <column name="start_date" value="2025-01-19 21:00:00"/>
+            <column name="end_date" value="2025-01-19 21:00:00"/>
+            <column name="value" value="1000000.00"/>
+            <column name="currency" value="USD"/>
+            <column name="description" value="Description 1"/>
         </insert>
     </changeSet>
 </databaseChangeLog>
