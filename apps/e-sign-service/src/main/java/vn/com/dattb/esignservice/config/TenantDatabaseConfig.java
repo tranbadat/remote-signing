@@ -27,7 +27,7 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "vn.com.dattb.coreservice.repository.tenant", // Replace with your tenant repository package
+        basePackages = "vn.com.dattb.esignservice.repository.tenant", // Replace with your tenant repository package
         entityManagerFactoryRef = "tenantEntityManagerFactory",
         transactionManagerRef = "tenantTransactionManager"
 )
@@ -40,7 +40,7 @@ public class TenantDatabaseConfig {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
-                .packages("vn.com.dattb.coreservice.entity.tenant") // Replace with your tenant entity package
+                .packages("vn.com.dattb.esignservice.entity.tenant") // Replace with your tenant entity package
                 .persistenceUnit("tenant")
                 .build();
     }

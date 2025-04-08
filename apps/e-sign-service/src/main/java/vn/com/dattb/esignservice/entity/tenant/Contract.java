@@ -29,32 +29,36 @@ public class Contract {
     @Column(name = "contract_number", nullable = false, length = 50)
     private String contractNumber;
 
-    @Column(name = "contract_name", nullable = false, length = 255)
+    @Column(name = "name", nullable = false, length = 255)
     private String contractName;
 
-    @Column(name = "contract_type", nullable = false, length = 255)
+    @Column(name = "type", nullable = false, length = 255)
     private String contractType;
 
-    @Column(name = "contract_status", nullable = false, length = 255)
+    @Column(name = "status", nullable = false, length = 255)
     private String contractStatus;
 
-    @Column(name = "contract_start_date", nullable = false)
+    @Column(name = "start_date", nullable = false)
     private LocalDateTime contractStartDate;
 
-    @Column(name = "contract_end_date", nullable = false)
+    @Column(name = "end_date", nullable = false)
     private LocalDateTime contractEndDate;
 
-    @Column(name = "contract_value", nullable = false, precision = 19, scale = 2)
+    @Column(name = "value", nullable = false, precision = 19, scale = 2)
     private BigDecimal contractValue;
 
-    @Column(name = "contract_currency", nullable = false, length = 10)
+    @Column(name = "currency", nullable = false, length = 10)
     private String contractCurrency;
 
-    @Column(name = "contract_description", columnDefinition = "TEXT")
+    @Column(name = "description", columnDefinition = "TEXT")
     private String contractDescription;
 
     @Column(name = "file_path", nullable = false, length = 255)
     private String filePath;
+
+    @CreationTimestamp
+    @Column(name = "signing_at", nullable = false, updatable = false)
+    private LocalDateTime signingAt;
 
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)

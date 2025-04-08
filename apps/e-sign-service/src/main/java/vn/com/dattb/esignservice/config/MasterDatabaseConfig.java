@@ -34,7 +34,7 @@ import java.util.HashMap;
 @Configuration
 @EnableTransactionManagement
 @EnableJpaRepositories(
-        basePackages = "vn.com.dattb.coreservice.repository.master", // Replace with your master repository package
+        basePackages = "vn.com.dattb.esignservice.repository.master", // Replace with your master repository package
         entityManagerFactoryRef = "masterEntityManagerFactory",
         transactionManagerRef = "masterTransactionManager"
 )
@@ -87,7 +87,7 @@ public class MasterDatabaseConfig {
             EntityManagerFactoryBuilder builder) {
         return builder
                 .dataSource(dataSource)
-                .packages("vn.com.dattb.coreservice.entity.master") // Replace with your master entity package
+                .packages("vn.com.dattb.esignservice.entity.master") // Replace with your master entity package
                 .persistenceUnit("master")
                 .build();
     }
