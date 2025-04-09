@@ -18,31 +18,31 @@ import java.util.List;
  * Description: ConfigController is the controller class for managing the configuration
  */
 @RestController
-@RequestMapping("/v1/configs")
-public class ConfigController {
+@RequestMapping("/v1/configs/signatures")
+public class SignatureConfigController {
 
-    @GetMapping("/signatures")
+    @GetMapping
     BaseResponse<Void> getSignaturesConfig() {
         return new BaseResponse<>("00", "Success");
     }
 
-    @GetMapping("/signatures/{id}")
+    @GetMapping("/{id}")
     BaseResponse<Void> getSignaturesConfig(@Valid @PathVariable Long id) {
         return new BaseResponse<>("00", "Success");
     }
 
-    @PostMapping("/signatures")
+    @PostMapping
     BaseResponse<Void> createSignaturesConfig(@Valid @NotNull @RequestBody List<SignatureConfigRequest> request) {
         return new BaseResponse<>("00", "Success");
     }
 
-    @PutMapping("/signatures/{id}")
+    @PutMapping("/{id}")
     BaseResponse<Void> updateSignaturesConfig(@Valid @PathVariable Long id,
                                               @Valid @NotNull @RequestBody List<SignatureConfigRequest> request) {
         return new BaseResponse<>("00", "Success");
     }
 
-    @DeleteMapping("/signatures/{id}")
+    @DeleteMapping("/{id}")
     BaseResponse<Void> deleteSignaturesConfig(@Valid @PathVariable Long id) {
         return new BaseResponse<>("00", "Success");
     }
