@@ -17,7 +17,7 @@ RUN gradle -i apps:e-sign-service:build
 FROM openjdk:17-alpine
 WORKDIR /app
 RUN echo "Copying jar"
-COPY --from=builder /workspace/apps/core-service/build/libs/core-service.jar .
+COPY --from=builder /workspace/apps/e-sign-servic/build/libs/e-sign-service.jar .
 COPY --from=builder /workspace/esign-dattb-firebase-adminsdk-zxyyn-e9464763f0.json /home/dattb/service-account.json
 RUN echo "Copying jar done"
-ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","core-service.jar"]
+ENTRYPOINT ["java","-Djava.security.egd=file:/dev/./urandom","-jar","e-sign-service.jar"]
