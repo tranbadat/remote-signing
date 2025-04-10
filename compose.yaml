@@ -194,10 +194,10 @@ services:
       - keycloak
     networks:
       - remote-signing-network
-  core-service:
-    container_name: core-service
+  e-sign-service:
+    container_name: e-sign-service
     build:
-      dockerfile: apps/core-service/Dockerfile
+      dockerfile: apps/e-sign-service/Dockerfile
     ports:
       - "8083:8083"
     depends_on:
