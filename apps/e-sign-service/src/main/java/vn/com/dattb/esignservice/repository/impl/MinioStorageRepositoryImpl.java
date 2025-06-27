@@ -1,22 +1,21 @@
 package vn.com.dattb.esignservice.repository.impl;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import io.minio.*;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
-import vn.com.dattb.common.util.EncryptUtils;
 import vn.com.dattb.esignservice.config.properties.MinioStorageProperties;
 import vn.com.dattb.esignservice.repository.StorageRepository;
 
-import javax.crypto.SecretKey;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.Map;
 
-@Repository
-@Qualifier("minioStorageRepository")
+@Repository("minioStorageRepository")
 @Slf4j
+@Primary
 public class MinioStorageRepositoryImpl implements StorageRepository {
 
     private final MinioStorageProperties properties;
@@ -34,10 +33,9 @@ public class MinioStorageRepositoryImpl implements StorageRepository {
         }
     }
 
-    private ServerSideEncryption createEncryption() throws NoSuchAlgorithmException, InvalidKeyException {
-        SecretKey key = EncryptUtils.stringToSecretKey(properties.getKmsKey());
+    private ServerSideEncryption createEncryption() throws NoSuchAlgorithmException, InvalidKeyException, JsonProcessingException {
         log.info("Using KMS key: {}", properties.getKmsKeyId());
-        return new ServerSideEncryptionCustomerKey(key);
+        return new ServerSideEncryptionKms(properties.getKmsKeyId(),null);
     }
 
     @Override
@@ -47,7 +45,7 @@ public class MinioStorageRepositoryImpl implements StorageRepository {
             client.putObject(PutObjectArgs.builder()
                     .bucket(properties.getBucketName())
                     .object(filePath)
-                    .stream(file.getInputStream(), file.getSize(), -1)
+                    .stream(new java.io.ByteArrayInputStream(file.getBytes()), file.getSize(), -1)
                     .contentType(file.getContentType())
                     .userMetadata(Map.of("x-amz-server-side-encryption", "aws:kms"))
                     .sse(createEncryption())

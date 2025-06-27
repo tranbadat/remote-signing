@@ -1,5 +1,7 @@
 package vn.com.dattb.esignservice.util;
 
+import org.apache.commons.lang3.StringUtils;
+
 import java.time.LocalDateTime;
 
 /**
@@ -24,9 +26,11 @@ public class StorageUtils {
         String month = String.valueOf(now.getMonthValue());
         String day = String.valueOf(now.getDayOfMonth());
         StringBuilder path = new StringBuilder();
-        path.append(year).append("/").append(month).append("/").append(day).append("/");
+        path.append(year).append("/").append(month).append("/").append(day);
         for (String p : paths) {
-            path.append(p).append("/");
+            if (StringUtils.isBlank(p)) continue; // Skip empty or null paths
+            path.append("/");
+            path.append(p);
         }
         return path.toString();
     }

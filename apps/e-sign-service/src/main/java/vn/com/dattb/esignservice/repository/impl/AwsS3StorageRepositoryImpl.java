@@ -1,7 +1,6 @@
 package vn.com.dattb.esignservice.repository.impl;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.S3Client;
@@ -21,8 +20,7 @@ import java.io.IOException;
  * Description: S3StorageRepositoryImpl
  */
 @Slf4j
-@Repository
-@Qualifier("awsS3StorageRepository")
+@Repository("awsS3StorageRepository")
 public class AwsS3StorageRepositoryImpl implements StorageRepository {
     private final S3Client s3Client;
     private static final String BUCKET_NAME = "my-bucket";

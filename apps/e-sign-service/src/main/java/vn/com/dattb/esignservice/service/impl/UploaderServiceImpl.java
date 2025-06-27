@@ -50,6 +50,7 @@ public class UploaderServiceImpl implements UploaderService {
             // Do something
         } catch (Exception e) {
             log.error("Error uploading file", e);
+            throw new RuntimeException("Error uploading file: " + e.getMessage(), e);
         }
         return InitContractResponse.builder().build();
     }
