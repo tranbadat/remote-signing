@@ -1,6 +1,7 @@
 package vn.com.dattb.esignservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import vn.com.dattb.esignservice.entity.tenant.Contract;
 import vn.com.dattb.esignservice.repository.StorageRepository;
@@ -22,7 +23,7 @@ public class DownloaderServiceImpl implements DownloaderService {
     private final StorageRepository storageRepository;
     private final ContractRepository contractRepository;
 
-    public DownloaderServiceImpl(StorageRepository storageRepository, ContractRepository contractRepository) {
+    public DownloaderServiceImpl(@Qualifier("minioStorageRepository") StorageRepository storageRepository, ContractRepository contractRepository) {
         this.storageRepository = storageRepository;
         this.contractRepository = contractRepository;
     }
