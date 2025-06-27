@@ -27,6 +27,7 @@ ext {
     postgresVersion = "42.7.2"
     liquibaseVersion = "4.31.0"
     awsSdkVersion = "2.25.36"
+    minioVersion = "8.5.17"
 }
 
 allprojects {

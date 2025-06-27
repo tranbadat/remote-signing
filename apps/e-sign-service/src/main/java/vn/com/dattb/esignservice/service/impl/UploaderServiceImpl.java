@@ -1,6 +1,7 @@
 package vn.com.dattb.esignservice.service.impl;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import vn.com.dattb.esignservice.context.ClientContext;
@@ -28,7 +29,7 @@ public class UploaderServiceImpl implements UploaderService {
 
     private final StorageRepository storageRepository;
 
-    public UploaderServiceImpl(StorageRepository storageRepository) {
+    public UploaderServiceImpl(@Qualifier("minioStorageRepository") StorageRepository storageRepository) {
         this.storageRepository = storageRepository;
     }
 
