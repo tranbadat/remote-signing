@@ -13,7 +13,8 @@ dependencies {
     implementation project(':libs:common')
     implementation "org.liquibase:liquibase-core:${liquibaseVersion}"
     implementation "software.amazon.awssdk:s3:${awsSdkVersion}"
-
+    // For minio s3
+    implementation "io.minio:minio:${minioVersion}"
 
 }
 
