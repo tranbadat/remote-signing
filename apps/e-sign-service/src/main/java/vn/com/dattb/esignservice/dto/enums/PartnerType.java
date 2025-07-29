@@ -1,7 +1,6 @@
-package vn.com.dattb.esignservice;
+package vn.com.dattb.esignservice.dto.enums;
 
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * PartnerType

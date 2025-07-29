@@ -2,7 +2,7 @@ package vn.com.dattb.esignservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;
-import vn.com.dattb.esignservice.PartnerType;
+import vn.com.dattb.esignservice.dto.enums.PartnerType;
 
 /**
  * PartnerFlowDto

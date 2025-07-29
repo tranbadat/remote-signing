@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import vn.com.dattb.esignservice.common.FieldType;
+import vn.com.dattb.esignservice.dto.enums.FieldType;
 
 /**
  * SignatureConfigRequest
