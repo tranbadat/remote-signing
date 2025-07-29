@@ -21,13 +21,13 @@ public class UserContext {
         CURRENT_USER.set(info);
     }
 
-    public static String getCurrentUser() {
-        return StringUtils.isNotBlank(getCurrentUserId()) ? getCurrentUserId() : "anonymous";
+    public static UserContextInfo getCurrentUser() {
+        return CURRENT_USER.get();
     }
 
     public static String getCurrentUserId() {
         UserContextInfo userContextInfo = CURRENT_USER.get();
-        return userContextInfo != null ? userContextInfo.getUserId() : null;
+        return userContextInfo != null ? userContextInfo.getUserId() : "anonymous";
     }
 
     public static String getCurrentLanguage() {

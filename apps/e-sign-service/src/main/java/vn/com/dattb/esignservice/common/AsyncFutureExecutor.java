@@ -6,6 +6,7 @@ import org.slf4j.MDC;
 import vn.com.dattb.esignservice.context.ClientContext;
 import vn.com.dattb.esignservice.context.TenantContext;
 import vn.com.dattb.esignservice.context.UserContext;
+import vn.com.dattb.esignservice.context.UserContextInfo;
 
 import java.util.Map;
 import java.util.concurrent.CompletableFuture;
@@ -37,7 +38,7 @@ public class AsyncFutureExecutor {
         Map<String, String> contextMap = MDC.getCopyOfContextMap();
         String currentTenant = getCurrentTenant();
         String clientId = getCurrentClient();
-        String userId = getCurrentUser();
+        UserContextInfo userContextInfo = getCurrentUser();
 
         CompletableFuture.runAsync(() -> {
             try {
@@ -46,7 +47,7 @@ public class AsyncFutureExecutor {
                 }
                 setCurrentTenant(currentTenant);
                 setCurrentClient(clientId);
-                setCurrentUser(userId);
+                setCurrentUser(userContextInfo);
                 task.run();
             } catch (Exception e) {
                 logger.error("Error when run async task", e);
