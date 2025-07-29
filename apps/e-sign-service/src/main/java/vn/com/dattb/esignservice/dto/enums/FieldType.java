@@ -1,4 +1,4 @@
-package vn.com.dattb.esignservice.common;
+package vn.com.dattb.esignservice.dto.enums;
 
 /**
  * FieldType

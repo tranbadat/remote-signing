@@ -1,5 +1,8 @@
 package vn.com.dattb.esignservice.context;
 
+import lombok.experimental.UtilityClass;
+import org.apache.commons.lang3.StringUtils;
+
 /**
  * UserContext
  * <p>
@@ -9,16 +12,27 @@ package vn.com.dattb.esignservice.context;
  * <p>
  * Description: UserContext is the class for managing the user context
  */
+@UtilityClass
 public class UserContext {
 
-    private static final ThreadLocal<String> CURRENT_USER = new ThreadLocal<>();
+    private static final ThreadLocal<UserContextInfo> CURRENT_USER = new ThreadLocal<>();
 
-    public static void setCurrentUser(String userId) {
-        CURRENT_USER.set(userId);
+    public static void setCurrentUser(UserContextInfo info) {
+        CURRENT_USER.set(info);
     }
 
     public static String getCurrentUser() {
-        return CURRENT_USER.get();
+        return StringUtils.isNotBlank(getCurrentUserId()) ? getCurrentUserId() : "anonymous";
+    }
+
+    public static String getCurrentUserId() {
+        UserContextInfo userContextInfo = CURRENT_USER.get();
+        return userContextInfo != null ? userContextInfo.getUserId() : null;
+    }
+
+    public static String getCurrentLanguage() {
+        UserContextInfo userContextInfo = CURRENT_USER.get();
+        return userContextInfo != null ? userContextInfo.getLanguage() : null;
     }
 
     public static void clear() {
