@@ -2,6 +2,9 @@ package vn.com.dattb.esignservice.dto;
 
 import lombok.Getter;
 import lombok.Setter;
+import vn.com.dattb.esignservice.dto.enums.SignerType;
+
+import java.util.List;
 
 /**
  * SignerFlowDto
@@ -15,8 +18,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SignerFlowDto {
+    private Long partnerId;
     private Long id;
     private String name;
     private String email;
-    private Long partnerId;
+    private String phoneNumber;
+    private SignerType signType;
+    private int order;
+    private List<SignerFlowDto> signatures;
 }

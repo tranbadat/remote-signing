@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import vn.com.dattb.esignservice.dto.SigningFlowDto;
+import vn.com.dattb.esignservice.dto.enums.DocumentSecurityLevel;
 
 import java.time.LocalDateTime;
 
@@ -22,6 +24,9 @@ import java.time.LocalDateTime;
 @Builder
 public class InitContractRequest {
     private String name;
+    private String documentNumber;
     private String description;
     private LocalDateTime effectiveDate;
+    private DocumentSecurityLevel securityLevel;
+    private SigningFlowDto signingFlow;
 }

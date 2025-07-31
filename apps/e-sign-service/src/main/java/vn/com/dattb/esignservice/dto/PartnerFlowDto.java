@@ -4,6 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import vn.com.dattb.esignservice.dto.enums.PartnerType;
 
+import java.util.List;
+
 /**
  * PartnerFlowDto
  * <p>
@@ -19,4 +21,6 @@ public class PartnerFlowDto {
     private Long id;
     private String name;
     private PartnerType partnerType;
+    private int order;
+    private List<SignerFlowDto> signers;
 }
